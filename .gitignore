@@ -32,3 +32,6 @@ venv/
 
 # Generated test sandbox runtime artifacts
 tests/.sandbox/
+
+# Repository metadata excluded from this project
+.github/

@@ -1,6 +1,6 @@
 # Nucleus Copilot Adapter
 
-Use the repo-local Nucleus MCP registration in `.github/copilot-mcp-config.json`.
+Use the repo-local Nucleus MCP registration in `config/copilot/mcp-config.json`.
 
 At session start:
 - Run `python3 config/copilot/session_start.py --profile-id <profile> --workspace-id <workspace> --session-id <session>` to bootstrap deterministically.

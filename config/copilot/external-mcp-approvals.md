@@ -6,5 +6,5 @@ This document records explicit approval artifacts for external MCP registrations
 
 - **Server key:** `context7`
 - **Endpoint:** `https://mcp.context7.com/mcp`
-- **Approval scope:** Repository-local Copilot MCP registration in `.github/copilot-mcp-config.json`
+- **Approval scope:** Repository-local Copilot MCP registration in `config/copilot/mcp-config.json`
 - **Approval basis:** Maintainer-reviewed Stage 1 harness integration

@@ -2,7 +2,7 @@
   "externalMcpPolicy": {
     "allowlistedServers": {
       "context7": {
-        "approvalArtifact": ".github/external-mcp-approvals.md#context7"
+        "approvalArtifact": "config/copilot/external-mcp-approvals.md#context7"
       }
     }
   },
@@ -34,7 +34,7 @@
         "*"
       ],
       "url": "https://mcp.context7.com/mcp",
-      "approvalArtifact": ".github/external-mcp-approvals.md#context7"
+      "approvalArtifact": "config/copilot/external-mcp-approvals.md#context7"
     }
   }
 }
