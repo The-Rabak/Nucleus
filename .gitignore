@@ -3,3 +3,35 @@ docs/**
 !docs/architecture/
 !docs/architecture/**
 !docs/constitution.md
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local virtual environments and env files
+.venv/
+venv/
+.env
+.env.*
+
+# Editor / OS artifacts
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Generated test sandbox runtime artifacts
+tests/.sandbox/**/episodes/**/ep_*.md
+tests/.sandbox/**/checkpoints/**/cp_*.json
+tests/.sandbox/**/checkpoints/**/latest.json
+tests/.sandbox/**/lifecycle/state.json
