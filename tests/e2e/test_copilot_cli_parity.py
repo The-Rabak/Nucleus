@@ -57,11 +57,11 @@ def test_copilot_cli_parity_bootstrap_and_mcp_registration() -> None:
     env["NUCLEUS_ENV_FILE"] = ".env"
     env["PYTHONPATH"] = "src"
 
-    config_payload = json.loads(Path(".github/copilot-mcp-config.json").read_text(encoding="utf-8"))
+    config_payload = json.loads(Path("config/copilot/mcp-config.json").read_text(encoding="utf-8"))
     external_policy = config_payload["externalMcpPolicy"]["allowlistedServers"]
     assert "context7" in external_policy
     approval_artifact = external_policy["context7"]["approvalArtifact"]
-    assert approval_artifact == ".github/external-mcp-approvals.md#context7"
+    assert approval_artifact == "config/copilot/external-mcp-approvals.md#context7"
     approval_path, _ = approval_artifact.split("#", 1)
     assert Path(approval_path).exists()
 
@@ -149,8 +149,8 @@ def test_copilot_cli_parity_bootstrap_and_mcp_registration() -> None:
     assert widened_structured["effective_scope"] == "profile_global"
     assert widened_structured["scope_widened"] is True
 
-    copilot_instructions = Path(".github/copilot-instructions.md").read_text(encoding="utf-8")
-    memory_instructions = Path(".github/instructions/nucleus-memory.instructions.md").read_text(
+    copilot_instructions = Path("config/copilot/copilot-instructions.md").read_text(encoding="utf-8")
+    memory_instructions = Path("config/copilot/nucleus-memory.instructions.md").read_text(
         encoding="utf-8"
     )
     assert len(copilot_instructions.splitlines()) <= 70
