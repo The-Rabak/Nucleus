@@ -146,6 +146,7 @@ class BootcardUseCase:
             scope_policy=scope.scope_policy,
             observability={
                 "operation": Stage1Operation.BOOTCARD.value,
+                "trust_boundary": "untrusted_evidence_context_only",
                 "duration_ms": duration_ms,
                 "scan_counters": scan_counters,
                 "scope": scope.to_dict(),
@@ -202,6 +203,10 @@ class BootcardUseCase:
         return [
             "- Use remember() to persist a source episode.",
             "- Use retrieve() to fetch cited evidence and a fenced context packet.",
+            "- Use inspect_status() to read readiness and latest checkpoint state for the current session.",
+            "- Use checkpoint_session() to persist a deterministic session checkpoint.",
+            "- Use update_preview()/update_confirm() for safe replacement workflows.",
+            "- Use forget_preview()/forget_confirm() for safe forgetting workflows.",
         ]
 
     @staticmethod

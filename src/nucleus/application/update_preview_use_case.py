@@ -3,16 +3,18 @@ from __future__ import annotations
 from typing import cast
 
 from nucleus.application.ports import EpisodeRepository
-from nucleus.domain.constants import (
-    MutationOperation,
-    PreviewOperation,
-    ScopeMode,
+from nucleus.application.preview_confirm_safety import (
+    build_preview_candidate_payload,
+    resolve_preview_workspace_scope,
 )
+from nucleus.domain.constants import MutationOperation, PreviewOperation
 from nucleus.application.retrieve_use_case import RetrieveUseCase
 from nucleus.domain.models import MutationPreviewResult, RetrieveResult
-from nucleus.domain.preview_token import PreviewTokenClaims, issue_preview_token
-from nucleus.domain.scoping import ScopeDecision, resolve_scope_mode
-
+from nucleus.domain.preview_token import (
+    PreviewTokenClaims,
+    issue_preview_token,
+    preview_token_claims_digest,
+)
 _DEFAULT_TTL_SECONDS = 300
 
 
@@ -38,7 +40,10 @@ class UpdatePreviewUseCase:
         scope_mode: str | None = None,
     ) -> MutationPreviewResult:
         """Builds an update preview payload for explicit user confirmation."""
-        scope = self._workspace_scope(scope_mode=scope_mode)
+        scope = resolve_preview_workspace_scope(
+            scope_mode=scope_mode,
+            operation=MutationOperation.UPDATE_PREVIEW.value,
+        )
         result_args = self._preview_result_args(
             profile_id=profile_id,
             workspace_id=workspace_id,
@@ -130,16 +135,6 @@ class UpdatePreviewUseCase:
             "retrieval_observability": retrieval_observability,
         }
 
-    @staticmethod
-    def _workspace_scope(*, scope_mode: str | None) -> ScopeDecision:
-        scope = resolve_scope_mode(scope_mode=scope_mode)
-        if scope.scope_widened:
-            raise ValueError(
-                f"{ScopeMode.PROFILE_GLOBAL.value} scope_mode is not allowed for "
-                f"{MutationOperation.UPDATE_PREVIEW.value}."
-            )
-        return scope
-
     def _retrieve(
         self,
         *,
@@ -173,36 +168,7 @@ class UpdatePreviewUseCase:
             episode_ids=candidate_ids,
             scope_mode=scope_mode,
         )
-        return self._candidate_payload(results=results, integrity=integrity)
-
-    @staticmethod
-    def _candidate_payload(
-        *,
-        results: list[dict[str, object]],
-        integrity: dict[str, dict[str, str]],
-    ) -> tuple[list[dict[str, object]], dict[str, dict[str, str]], dict[str, str]]:
-        candidates: list[dict[str, object]] = []
-        candidate_integrity: dict[str, dict[str, str]] = {}
-        token_integrity: dict[str, str] = {}
-        for result in results:
-            citation = cast(dict[str, object], result["citation"])
-            episode_id = str(citation["episode_id"])
-            integrity_snapshot = integrity.get(episode_id)
-            if integrity_snapshot is None:
-                continue
-            candidate_integrity[episode_id] = integrity_snapshot
-            token_integrity[episode_id] = integrity_snapshot["state_hash"]
-            candidates.append(
-                {
-                    "episode_id": episode_id,
-                    "statement": result["statement"],
-                    "source_type": citation["source_type"],
-                    "observed_at": citation["observed_at"],
-                    "source_hash": citation["source_hash"],
-                    "state_hash": integrity_snapshot["state_hash"],
-                }
-            )
-        return candidates, candidate_integrity, token_integrity
+        return build_preview_candidate_payload(results=results, integrity=integrity)
 
     def _issue_preview_token(
         self,
@@ -212,6 +178,10 @@ class UpdatePreviewUseCase:
         scope_mode: str,
         token_integrity: dict[str, str],
     ) -> tuple[str, PreviewTokenClaims]:
+        signing_key = self._episode_store.preview_token_signing_key(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+        )
         preview_token, claims = issue_preview_token(
             operation=PreviewOperation.UPDATE.value,
             profile_id=profile_id,
@@ -219,6 +189,7 @@ class UpdatePreviewUseCase:
             scope_mode=scope_mode,
             candidate_integrity=token_integrity,
             ttl_seconds=_DEFAULT_TTL_SECONDS,
+            signing_key=signing_key,
         )
         self._register_token(
             profile_id=profile_id,
@@ -227,6 +198,7 @@ class UpdatePreviewUseCase:
             token_id=claims.token_id,
             issued_at=claims.issued_at,
             expires_at=claims.expires_at,
+            claims_digest=preview_token_claims_digest(claims),
         )
         return preview_token, claims
 
@@ -239,6 +211,7 @@ class UpdatePreviewUseCase:
         token_id: str,
         issued_at: str,
         expires_at: str,
+        claims_digest: str,
     ) -> None:
         self._episode_store.register_preview_token(
             profile_id=profile_id,
@@ -248,6 +221,7 @@ class UpdatePreviewUseCase:
             token_id=token_id,
             issued_at=issued_at,
             expires_at=expires_at,
+            claims_digest=claims_digest,
         )
 
     @classmethod

@@ -8,6 +8,13 @@ from nucleus.infra.app_factory import create_app
 from nucleus.testing.sandbox import reset_sandbox
 
 
+def _tamper_preview_token(token: str) -> str:
+    prefix, payload, signature = token.split(".")
+    replacement = "A" if payload[-1] != "A" else "B"
+    tampered_payload = f"{payload[:-1]}{replacement}"
+    return f"{prefix}.{tampered_payload}.{signature}"
+
+
 def test_preview_confirm_safety_lifecycle() -> None:
     data_root = reset_sandbox(Path("tests/.sandbox/e2e_preview_confirm_safety"))
     app = create_app(data_root=data_root)
@@ -83,6 +90,18 @@ def test_preview_confirm_safety_lifecycle() -> None:
             },
         )
 
+    with pytest.raises(ValueError, match="signature mismatch"):
+        app.mcp_server.call_tool(
+            "update_confirm",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "preview_token": _tamper_preview_token(preview_update_fresh["preview_token"]),
+                "selected_episode_ids": [update_candidate],
+                "replacement_content": "Project Atlas budget is 1300 USD after update.",
+            },
+        )
+
     update_confirm = app.mcp_server.call_tool(
         "update_confirm",
         {
@@ -102,6 +121,18 @@ def test_preview_confirm_safety_lifecycle() -> None:
     assert update_confirm["superseded_episode_ids"] == [update_candidate]
     assert update_confirm["replacement_episode_id"].startswith("ep_")
     assert update_confirm["audit"]["preserved"] is True
+
+    with pytest.raises(ValueError, match="stale"):
+        app.mcp_server.call_tool(
+            "update_confirm",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "preview_token": preview_update_fresh["preview_token"],
+                "selected_episode_ids": [update_candidate],
+                "replacement_content": "Project Atlas budget is 1300 USD after update.",
+            },
+        )
 
     old_retrieve = app.retrieve.execute(
         profile_id="profile-alpha",
@@ -158,6 +189,17 @@ def test_preview_confirm_safety_lifecycle() -> None:
             },
         )
 
+    with pytest.raises(ValueError, match="signature mismatch"):
+        app.http_api.call_operation(
+            "forget_confirm",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "preview_token": _tamper_preview_token(preview_forget_fresh["preview_token"]),
+                "selected_episode_ids": [forget_candidate],
+            },
+        )
+
     forget_confirm = app.http_api.call_operation(
         "forget_confirm",
         {
@@ -170,6 +212,17 @@ def test_preview_confirm_safety_lifecycle() -> None:
 
     assert forget_confirm["forgotten_episode_ids"] == [forget_candidate]
     assert forget_confirm["audit"]["preserved"] is True
+
+    with pytest.raises(ValueError, match="stale"):
+        app.http_api.call_operation(
+            "forget_confirm",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "preview_token": preview_forget_fresh["preview_token"],
+                "selected_episode_ids": [forget_candidate],
+            },
+        )
 
     forgotten_retrieve = app.retrieve.execute(
         profile_id="profile-alpha",

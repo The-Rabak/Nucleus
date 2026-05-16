@@ -1,13 +1,21 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
 from dataclasses import dataclass
 
 from nucleus.application.ports import EpisodeRepository
+from nucleus.application.preview_confirm_safety import (
+    ensure_active_preview_token,
+    ensure_current_preview_integrity,
+    validated_preview_claims,
+    validated_preview_selection,
+)
 from nucleus.application.remember_use_case import RememberUseCase
 from nucleus.domain.constants import MutationOperation, PreviewOperation
 from nucleus.domain.models import UpdateConfirmResult
-from nucleus.domain.preview_token import PreviewTokenClaims, parse_preview_token
+from nucleus.domain.preview_token import (
+    PreviewTokenClaims,
+    preview_token_claims_digest,
+)
 from nucleus.domain.scoping import ScopeDecision, resolve_scope_mode
 
 
@@ -70,6 +78,7 @@ class UpdateConfirmUseCase:
             preview_token=preview_token,
             profile_id=profile_id,
             workspace_id=workspace_id,
+            episode_store=self._episode_store,
         )
         selected = self._validated_selection(
             selected_episode_ids=selected_episode_ids,
@@ -130,13 +139,15 @@ class UpdateConfirmUseCase:
         preview_token: str,
         profile_id: str,
         workspace_id: str,
+        episode_store: EpisodeRepository,
     ) -> PreviewTokenClaims:
-        claims = parse_preview_token(preview_token)
-        if claims.operation != PreviewOperation.UPDATE.value:
-            raise ValueError("preview_token operation mismatch.")
-        if claims.profile_id != profile_id or claims.workspace_id != workspace_id:
-            raise ValueError("preview_token scope mismatch.")
-        return claims
+        return validated_preview_claims(
+            preview_token=preview_token,
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            episode_store=episode_store,
+            expected_operation=PreviewOperation.UPDATE.value,
+        )
 
     @staticmethod
     def _validated_selection(
@@ -144,12 +155,10 @@ class UpdateConfirmUseCase:
         selected_episode_ids: list[str],
         allowed_episode_ids: set[str],
     ) -> list[str]:
-        selected = sorted(set(selected_episode_ids))
-        if not selected:
-            raise ValueError("selected_episode_ids must include at least one candidate.")
-        if not set(selected).issubset(allowed_episode_ids):
-            raise ValueError("selected_episode_ids mismatch preview candidates.")
-        return selected
+        return validated_preview_selection(
+            selected_episode_ids=selected_episode_ids,
+            allowed_episode_ids=allowed_episode_ids,
+        )
 
     def _validate_token_and_integrity(
         self,
@@ -163,6 +172,7 @@ class UpdateConfirmUseCase:
             profile_id=profile_id,
             workspace_id=workspace_id,
             token_id=claims.token_id,
+            claims_digest=preview_token_claims_digest(claims),
             scope_mode=claims.scope_mode,
         )
         self._ensure_current_integrity(
@@ -178,18 +188,18 @@ class UpdateConfirmUseCase:
         profile_id: str,
         workspace_id: str,
         token_id: str,
+        claims_digest: str,
         scope_mode: str,
     ) -> None:
-        if self._episode_store.is_preview_token_active(
+        ensure_active_preview_token(
+            episode_store=self._episode_store,
             profile_id=profile_id,
             workspace_id=workspace_id,
             operation=PreviewOperation.UPDATE.value,
             scope_mode=scope_mode,
             token_id=token_id,
-            now=datetime.now(UTC),
-        ):
-            return
-        raise ValueError("preview_token stale; request a fresh preview.")
+            claims_digest=claims_digest,
+        )
 
     def _ensure_current_integrity(
         self,
@@ -199,16 +209,13 @@ class UpdateConfirmUseCase:
         selected_episode_ids: list[str],
         claims: PreviewTokenClaims,
     ) -> None:
-        current_integrity = self._episode_store.candidate_integrity(
+        ensure_current_preview_integrity(
+            episode_store=self._episode_store,
             profile_id=profile_id,
             workspace_id=workspace_id,
-            episode_ids=selected_episode_ids,
-            scope_mode=claims.scope_mode,
+            selected_episode_ids=selected_episode_ids,
+            claims=claims,
         )
-        for episode_id in selected_episode_ids:
-            current_state_hash = current_integrity.get(episode_id, {}).get("state_hash")
-            if current_state_hash != claims.candidate_integrity[episode_id]:
-                raise ValueError("preview_token mismatch with current candidate state.")
 
     def _apply_confirmation(self, *, profile_id: str, workspace_id: str, claims: PreviewTokenClaims, selected_episode_ids: list[str], replacement_content: str, replacement_fields: dict[str, object]) -> tuple[str, dict[str, object]]:
         replacement_episode_id = self._replacement_episode_id(

@@ -46,6 +46,7 @@ class NucleusOperationAdapter:
         bootcard_use_case: BootcardUseCase,
         bound_profile_id: str | None = None,
         bound_workspace_id: str | None = None,
+        require_bound_scope: bool = False,
     ) -> None:
         self._remember_use_case = remember_use_case
         self._retrieve_use_case = retrieve_use_case
@@ -58,6 +59,7 @@ class NucleusOperationAdapter:
         self._bootcard_use_case = bootcard_use_case
         self._bound_profile_id = bound_profile_id
         self._bound_workspace_id = bound_workspace_id
+        self._require_bound_scope = require_bound_scope
         self._operation_handlers = self._build_operation_handlers()
 
     def _build_operation_handlers(self) -> dict[str, OperationHandler]:
@@ -301,6 +303,13 @@ class NucleusOperationAdapter:
         return scoped_arguments
 
     def _enforce_bound_scope(self, scoped_arguments: JsonObject) -> None:
+        if self._require_bound_scope and (
+            self._bound_profile_id is None or self._bound_workspace_id is None
+        ):
+            raise ValueError(
+                "Authenticated scope binding is required; configure NUCLEUS_PROFILE_ID and "
+                "NUCLEUS_WORKSPACE_ID."
+            )
         if self._bound_profile_id and scoped_arguments["profile_id"] != self._bound_profile_id:
             raise ValueError("profile_id is outside the configured server scope.")
         if self._bound_workspace_id and scoped_arguments["workspace_id"] != self._bound_workspace_id:

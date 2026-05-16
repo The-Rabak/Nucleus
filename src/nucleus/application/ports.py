@@ -60,7 +60,15 @@ class EpisodeRepository(Protocol):
         token_id: str,
         issued_at: str,
         expires_at: str,
+        claims_digest: str,
     ) -> None: ...
+
+    def preview_token_snapshot(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+    ) -> dict[str, dict[str, str]]: ...
 
     def is_preview_token_active(
         self,
@@ -70,8 +78,16 @@ class EpisodeRepository(Protocol):
         operation: str,
         scope_mode: str,
         token_id: str,
+        claims_digest: str,
         now: datetime,
     ) -> bool: ...
+
+    def preview_token_signing_key(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+    ) -> str: ...
 
     def invalidate_preview_token(
         self,
@@ -103,3 +119,10 @@ class EpisodeRepository(Protocol):
         token_id: str,
         scope_mode: str,
     ) -> dict[str, object]: ...
+
+    def lifecycle_state_metrics(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+    ) -> dict[str, int]: ...

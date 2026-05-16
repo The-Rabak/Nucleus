@@ -141,9 +141,11 @@ class SessionCheckpointService:
         checkpoint_id: str,
         payload: JsonObject,
     ) -> None:
-        checkpoint_path = checkpoint_dir / f"{checkpoint_id}.json"
+        checkpoint_file = f"{checkpoint_id}.json"
+        checkpoint_path = checkpoint_dir / checkpoint_file
         self._atomic_write_json(checkpoint_path, payload)
         self._atomic_write_json(checkpoint_dir / "latest.json", payload)
+        self._atomic_write_text(self._latest_pointer_path(checkpoint_dir), checkpoint_file)
 
     def latest_checkpoint(
         self,
@@ -222,6 +224,7 @@ class SessionCheckpointService:
         latest_path = checkpoint_dir / "latest.json"
         if self._safe_read_json(latest_path) is None:
             self._atomic_write_json(latest_path, existing_payload)
+        self._atomic_write_text(self._latest_pointer_path(checkpoint_dir), checkpoint_path.name)
         return existing_payload
 
     def _new_checkpoint_payload(
@@ -243,6 +246,14 @@ class SessionCheckpointService:
             workspace_id=workspace_id,
             limit=3,
         )
+        preview_tokens = self._episode_store.preview_token_snapshot(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+        )
+        lifecycle_metrics = self._episode_store.lifecycle_state_metrics(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+        )
         return {
             "checkpoint_id": checkpoint_id,
             "recorded_at": datetime.now(UTC).isoformat(),
@@ -252,14 +263,26 @@ class SessionCheckpointService:
             "idempotency_key": idempotency_key,
             "summary": self._build_summary(trigger=trigger, episodes=recent_episodes),
             "citations": self._build_citations(recent_episodes),
+            "preview_tokens": preview_tokens if include_preview_tokens else {},
             "warnings": [] if include_preview_tokens else [self._preview_token_warning()],
+            "observability": {
+                "checkpoint_phase": {
+                    "citation_count": len(recent_episodes),
+                    "preview_token_count": len(preview_tokens),
+                    **lifecycle_metrics,
+                }
+            },
         }
 
     @staticmethod
     def _preview_token_warning() -> str:
-        return "preview tokens were excluded"
+        return "preview token snapshot was excluded"
 
     def _latest_checkpoint_from_candidates(self, *, checkpoint_dir: Path) -> JsonObject | None:
+        pointer_payload = self._latest_checkpoint_from_pointer(checkpoint_dir=checkpoint_dir)
+        if pointer_payload is not None:
+            self._atomic_write_json(checkpoint_dir / "latest.json", pointer_payload)
+            return pointer_payload
         checkpoint_candidates = sorted(
             checkpoint_dir.glob("cp_*.json"),
             key=self._checkpoint_sort_key,
@@ -270,8 +293,27 @@ class SessionCheckpointService:
             if payload is None:
                 continue
             self._atomic_write_json(checkpoint_dir / "latest.json", payload)
+            self._atomic_write_text(self._latest_pointer_path(checkpoint_dir), checkpoint_path.name)
             return payload
         return None
+
+    def _latest_checkpoint_from_pointer(self, *, checkpoint_dir: Path) -> JsonObject | None:
+        pointer_path = self._latest_pointer_path(checkpoint_dir)
+        if not pointer_path.exists():
+            return None
+        try:
+            checkpoint_file = pointer_path.read_text(encoding="utf-8").strip()
+        except OSError as exc:
+            raise ValueError(f"Checkpoint latest pointer is corrupt at {pointer_path}.") from exc
+        if not checkpoint_file:
+            return None
+        checkpoint_path = checkpoint_dir / checkpoint_file
+        self._ensure_within_profiles_root(checkpoint_path)
+        return self._safe_read_json(checkpoint_path)
+
+    @staticmethod
+    def _latest_pointer_path(checkpoint_dir: Path) -> Path:
+        return checkpoint_dir / "latest.pointer"
 
     @staticmethod
     def _checkpoint_sort_key(path: Path) -> float:
@@ -311,15 +353,21 @@ class SessionCheckpointService:
         temp_path.replace(path)
 
     @staticmethod
+    def _atomic_write_text(path: Path, content: str) -> None:
+        temp_path = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+        temp_path.write_text(content, encoding="utf-8")
+        temp_path.replace(path)
+
+    @staticmethod
     def _safe_read_json(path: Path) -> JsonObject | None:
         if not path.exists():
             return None
         try:
             raw_payload = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            return None
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Checkpoint payload is corrupt at {path}.") from exc
         if not isinstance(raw_payload, dict):
-            return None
+            raise ValueError(f"Checkpoint payload is corrupt at {path}.")
         return raw_payload
 
     @staticmethod
@@ -359,6 +407,8 @@ class SessionCheckpointService:
             idempotency_key=str(payload["idempotency_key"]),
             summary=str(payload["summary"]),
             citations=list(payload["citations"]),
+            preview_tokens=dict(payload.get("preview_tokens", {})),
             warnings=list(payload.get("warnings", [])),
+            observability=dict(payload.get("observability", {})),
             idempotent=idempotent,
         )

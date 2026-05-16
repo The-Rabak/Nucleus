@@ -105,7 +105,9 @@ class SessionCheckpointResult:
     idempotency_key: str
     summary: str
     citations: list[JsonObject]
+    preview_tokens: JsonObject = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
+    observability: JsonObject = field(default_factory=dict)
     idempotent: bool = False
 
     def to_dict(self) -> JsonObject:
@@ -118,7 +120,9 @@ class SessionCheckpointResult:
             "idempotency_key": self.idempotency_key,
             "summary": self.summary,
             "citations": self.citations,
+            "preview_tokens": self.preview_tokens,
             "warnings": self.warnings,
+            "observability": self.observability,
             "idempotent": self.idempotent,
         }
 

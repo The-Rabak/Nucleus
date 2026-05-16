@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 import base64
 import hashlib
+import hmac
 import json
 import uuid
 
@@ -44,6 +45,7 @@ def issue_preview_token(
     scope_mode: str,
     candidate_integrity: dict[str, str],
     ttl_seconds: int,
+    signing_key: str,
     now: datetime | None = None,
 ) -> tuple[str, PreviewTokenClaims]:
     _validate_token_request(operation=operation, ttl_seconds=ttl_seconds)
@@ -58,14 +60,24 @@ def issue_preview_token(
         expires_at=expires_at_dt,
         candidate_integrity=candidate_integrity,
     )
-    return _token(claims), claims
+    return _token(claims, signing_key=signing_key), claims
 
 
-def parse_preview_token(token: str, *, now: datetime | None = None) -> PreviewTokenClaims:
-    encoded_payload = _validated_encoded_payload(token)
+def parse_preview_token(
+    token: str,
+    *,
+    signing_key: str,
+    now: datetime | None = None,
+) -> PreviewTokenClaims:
+    encoded_payload = _validated_encoded_payload(token, signing_key=signing_key)
     claims = _claims_from_payload(_decode_payload(encoded_payload))
     _validate_claims(claims, now=now)
     return claims
+
+
+def preview_token_claims_digest(claims: PreviewTokenClaims) -> str:
+    payload = json.dumps(claims.to_dict(), sort_keys=True, separators=(",", ":"))
+    return f"cdg_{hashlib.sha256(payload.encode('utf-8')).hexdigest()[:24]}"
 
 
 def _decode_payload(encoded_payload: str) -> dict[str, object]:
@@ -80,8 +92,10 @@ def _decode_payload(encoded_payload: str) -> dict[str, object]:
     return payload
 
 
-def _checksum(encoded_payload: str) -> str:
-    return hashlib.sha256(f"{_TOKEN_PREFIX}.{encoded_payload}".encode("utf-8")).hexdigest()[:16]
+def _signature(*, encoded_payload: str, signing_key: str) -> str:
+    message = f"{_TOKEN_PREFIX}.{encoded_payload}".encode("utf-8")
+    key = signing_key.encode("utf-8")
+    return hmac.new(key, message, hashlib.sha256).hexdigest()[:32]
 
 
 def _validate_token_request(*, operation: str, ttl_seconds: int) -> None:
@@ -121,19 +135,21 @@ def _claims(
     )
 
 
-def _token(claims: PreviewTokenClaims) -> str:
+def _token(claims: PreviewTokenClaims, *, signing_key: str) -> str:
     payload = json.dumps(claims.to_dict(), sort_keys=True, separators=(",", ":")).encode("utf-8")
     encoded_payload = base64.urlsafe_b64encode(payload).decode("utf-8").rstrip("=")
-    return f"{_TOKEN_PREFIX}.{encoded_payload}.{_checksum(encoded_payload)}"
+    signature = _signature(encoded_payload=encoded_payload, signing_key=signing_key)
+    return f"{_TOKEN_PREFIX}.{encoded_payload}.{signature}"
 
 
-def _validated_encoded_payload(token: str) -> str:
+def _validated_encoded_payload(token: str, *, signing_key: str) -> str:
     parts = token.split(".")
     if len(parts) != 3 or parts[0] != _TOKEN_PREFIX:
         raise ValueError("preview_token format is invalid.")
-    encoded_payload, checksum = parts[1], parts[2]
-    if checksum != _checksum(encoded_payload):
-        raise ValueError("preview_token checksum mismatch.")
+    encoded_payload, signature = parts[1], parts[2]
+    expected_signature = _signature(encoded_payload=encoded_payload, signing_key=signing_key)
+    if not hmac.compare_digest(signature, expected_signature):
+        raise ValueError("preview_token signature mismatch.")
     return encoded_payload
 
 

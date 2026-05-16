@@ -33,7 +33,7 @@ class InspectStatusUseCase:
             session_id=session_id,
         )
         readiness = self._readiness(profile_id=safe_profile_id, workspace_id=safe_workspace_id)
-        latest_checkpoint = self._latest_checkpoint(
+        latest_checkpoint, warnings = self._latest_checkpoint_with_warnings(
             profile_id=safe_profile_id,
             workspace_id=safe_workspace_id,
             session_id=safe_session_id,
@@ -45,7 +45,7 @@ class InspectStatusUseCase:
             scope_policy=scope.scope_policy,
             readiness=readiness,
             latest_checkpoint=latest_checkpoint,
-            warnings=[],
+            warnings=warnings,
         )
 
     @staticmethod
@@ -78,3 +78,19 @@ class InspectStatusUseCase:
             workspace_id=workspace_id,
             session_id=session_id,
         )
+
+    def _latest_checkpoint_with_warnings(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+    ) -> tuple[dict[str, object] | None, list[str]]:
+        try:
+            return self._latest_checkpoint(
+                profile_id=profile_id,
+                workspace_id=workspace_id,
+                session_id=session_id,
+            ), []
+        except ValueError as exc:
+            return None, [f"checkpoint_state_corrupt: {exc}"]

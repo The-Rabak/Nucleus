@@ -67,6 +67,7 @@ def create_app(
         bootcard_use_case=use_cases.bootcard,
         bound_profile_id=resolved_runtime_config.bound_profile_id,
         bound_workspace_id=resolved_runtime_config.bound_workspace_id,
+        require_bound_scope=resolved_runtime_config.require_bound_scope,
     )
     return _build_nucleus_app(use_cases=use_cases, operation_adapter=operation_adapter)
 

@@ -11,7 +11,10 @@ from nucleus.infra.runtime_config import load_runtime_config
 def test_load_runtime_config_reads_env_file(tmp_path: Path) -> None:
     env_file = tmp_path / ".env"
     env_file.write_text(
-        "NUCLEUS_DATA_DIR=.nucleus-from-env\nNUCLEUS_PROFILE_ID=profile-alpha\nNUCLEUS_WORKSPACE_ID=workspace-core\n",
+        "NUCLEUS_DATA_DIR=.nucleus-from-env\n"
+        "NUCLEUS_PROFILE_ID=profile-alpha\n"
+        "NUCLEUS_WORKSPACE_ID=workspace-core\n"
+        "NUCLEUS_REQUIRE_BOUND_SCOPE=true\n",
         encoding="utf-8",
     )
     environ: dict[str, str] = {"NUCLEUS_ENV_FILE": str(env_file)}
@@ -22,6 +25,7 @@ def test_load_runtime_config_reads_env_file(tmp_path: Path) -> None:
     assert config.data_dir == Path(".nucleus-from-env")
     assert config.bound_profile_id == "profile-alpha"
     assert config.bound_workspace_id == "workspace-core"
+    assert config.require_bound_scope is True
 
 
 def test_create_app_uses_injected_runtime_config(tmp_path: Path) -> None:
@@ -34,6 +38,7 @@ def test_create_app_uses_injected_runtime_config(tmp_path: Path) -> None:
     environ: dict[str, str] = {
         "NUCLEUS_ENV_FILE": str(env_file),
         "NUCLEUS_DATA_DIR": str(runtime_data_dir),
+        "NUCLEUS_REQUIRE_BOUND_SCOPE": "true",
     }
 
     runtime_config = load_runtime_config(environ=environ)
@@ -61,3 +66,8 @@ def test_create_app_uses_injected_runtime_config(tmp_path: Path) -> None:
                 "content": "out of scope",
             },
         )
+
+
+def test_load_runtime_config_defaults_scope_binding_mode_to_compatibility() -> None:
+    config = load_runtime_config(environ={})
+    assert config.require_bound_scope is False

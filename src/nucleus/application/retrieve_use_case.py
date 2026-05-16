@@ -109,6 +109,7 @@ class RetrieveUseCase:
             observability={
                 "operation": Stage1Operation.RETRIEVE.value,
                 "visibility_policy": "active_only",
+                "trust_boundary": "untrusted_evidence_context_only",
                 "duration_ms": operation_duration_ms,
                 "scan_counters": scan_counters,
                 "scope": scope.to_dict(),

@@ -10,6 +10,8 @@ CONTEXT_WARNING = (
 RETRIEVE_EMPTY_MESSAGE = "No cited memories found for this workspace query."
 BOOTCARD_EMPTY_MESSAGE = "No recent cited memories yet."
 _EMPTY_EPISODE_PLACEHOLDER = "[empty episode]"
+_UNTRUSTED_BLOCK_BEGIN = "[UNTRUSTED-EVIDENCE-BEGIN]"
+_UNTRUSTED_BLOCK_END = "[UNTRUSTED-EVIDENCE-END]"
 
 
 def redact_raw_file_path(raw_file_path: str) -> str:
@@ -26,6 +28,11 @@ def build_context_packet(*, episodes: list[EpisodeRecord], empty_message: str) -
     lines = ["```nucleus-context", CONTEXT_WARNING, ""]
     if not episodes:
         lines.append(empty_message)
+        lines.append(_UNTRUSTED_BLOCK_BEGIN)
+        lines.append(_UNTRUSTED_BLOCK_END)
+        lines.append("```")
+        return "\n".join(lines)
+    lines.append(_UNTRUSTED_BLOCK_BEGIN)
     for index, episode in enumerate(episodes, start=1):
         lines.append(f"[{index}] {safe_inline_text(episode.content, limit=180)}")
         lines.append(
@@ -33,6 +40,7 @@ def build_context_packet(*, episodes: list[EpisodeRecord], empty_message: str) -
             f"citation: episode_id={episode.episode_id} source_type={episode.source_type} "
             f"raw_file_path={safe_inline_text(redact_raw_file_path(episode.raw_file_path), limit=120)}"
         )
+    lines.append(_UNTRUSTED_BLOCK_END)
     lines.append("```")
     return "\n".join(lines)
 

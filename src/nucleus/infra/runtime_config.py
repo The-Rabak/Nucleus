@@ -12,6 +12,7 @@ class RuntimeConfig:
     env_file: Path
     bound_profile_id: str | None
     bound_workspace_id: str | None
+    require_bound_scope: bool
 
 
 def load_runtime_config(
@@ -28,6 +29,9 @@ def load_runtime_config(
         env_file=env_file,
         bound_profile_id=target_environ.get("NUCLEUS_PROFILE_ID"),
         bound_workspace_id=target_environ.get("NUCLEUS_WORKSPACE_ID"),
+        require_bound_scope=_parse_bool_env(
+            target_environ.get("NUCLEUS_REQUIRE_BOUND_SCOPE"),
+        ),
     )
 
 
@@ -47,3 +51,9 @@ def load_env_file(
         key, value = line.split("=", 1)
         normalized_value = value.strip().strip("'").strip('"')
         target_environ.setdefault(key.strip(), normalized_value)
+
+
+def _parse_bool_env(raw_value: str | None) -> bool:
+    if raw_value is None:
+        return False
+    return raw_value.strip().lower() in {"1", "true", "yes", "on"}

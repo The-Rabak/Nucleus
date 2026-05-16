@@ -119,7 +119,9 @@ def test_precompact_stop_checkpointing_survives_to_next_bootstrap() -> None:
         env,
     )
     assert_mcp_tool_envelope(session_end)
-    assert session_end["structuredContent"]["cleanup_only"] is True
+    session_end_structured = session_end["structuredContent"]
+    assert session_end_structured["cleanup_only"] is True
+    assert session_end_structured["status"] == "ok"
 
     manual_checkpoint = app.mcp_server.call_tool(
         "checkpoint_session",
@@ -169,3 +171,79 @@ def test_precompact_stop_checkpointing_survives_to_next_bootstrap() -> None:
     markdown = bootcard_payload["structuredContent"]["markdown"]
     assert "Latest checkpoint" in markdown
     assert latest_checkpoint["checkpoint_id"] in markdown
+
+
+def test_session_end_reports_degraded_status_when_inspect_status_fails() -> None:
+    data_root = reset_sandbox(Path("tests/.sandbox/e2e_session_end_degraded"))
+    env = os.environ.copy()
+    env["NUCLEUS_DATA_DIR"] = str(data_root)
+    env["PYTHONPATH"] = "src"
+
+    session_end = _run_hook(
+        "session_end.py",
+        [
+            "--profile-id",
+            "profile/alpha",
+            "--workspace-id",
+            "workspace-core",
+            "--session-id",
+            "session-7",
+        ],
+        env,
+    )
+    assert_mcp_tool_envelope(session_end)
+    structured = session_end["structuredContent"]
+    assert structured["cleanup_only"] is True
+    assert structured["status"] == "degraded"
+    assert structured["error"]["kind"] == "ValueError"
+    assert "profile_id" in structured["error"]["message"]
+    assert structured["latest_checkpoint"] is None
+    assert structured["readiness"] is None
+
+    summary = session_end["content"][0]["text"]
+    assert "degraded" in summary
+    assert "cleanup complete" not in summary
+
+
+def test_session_end_reports_degraded_status_on_checkpoint_warning() -> None:
+    data_root = reset_sandbox(Path("tests/.sandbox/e2e_session_end_checkpoint_warning"))
+    env = os.environ.copy()
+    env["NUCLEUS_DATA_DIR"] = str(data_root)
+    env["PYTHONPATH"] = "src"
+
+    checkpoint_root = (
+        data_root
+        / "profiles"
+        / "profile-alpha"
+        / "workspaces"
+        / "workspace-core"
+        / "checkpoints"
+        / "sessions"
+        / "session-7"
+    )
+    checkpoint_root.mkdir(parents=True, exist_ok=True)
+    (checkpoint_root / "latest.json").write_text("{invalid json", encoding="utf-8")
+
+    session_end = _run_hook(
+        "session_end.py",
+        [
+            "--profile-id",
+            "profile-alpha",
+            "--workspace-id",
+            "workspace-core",
+            "--session-id",
+            "session-7",
+        ],
+        env,
+    )
+    assert_mcp_tool_envelope(session_end)
+    structured = session_end["structuredContent"]
+    assert structured["cleanup_only"] is True
+    assert structured["status"] == "degraded"
+    assert structured["warnings"]
+    assert "checkpoint_state_corrupt" in structured["warnings"][0]
+    assert structured["latest_checkpoint"] is None
+
+    summary = session_end["content"][0]["text"]
+    assert "degraded" in summary
+    assert "inspect_status reported state warnings" in summary

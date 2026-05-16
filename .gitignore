@@ -31,7 +31,6 @@ venv/
 .DS_Store
 
 # Generated test sandbox runtime artifacts
-tests/.sandbox/**/episodes/**/ep_*.md
-tests/.sandbox/**/checkpoints/**/cp_*.json
-tests/.sandbox/**/checkpoints/**/latest.json
-tests/.sandbox/**/lifecycle/state.json
+tests/.sandbox/
+.github/
+*.pyc
