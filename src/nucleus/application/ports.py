@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Protocol
 
+from nucleus.domain.constants import DEFAULT_SCOPE_MODE
 from nucleus.domain.models import EpisodeRecord
 
 
@@ -37,7 +38,7 @@ class EpisodeRepository(Protocol):
         workspace_id: str,
         query: str,
         top_k: int = 5,
-        scope_mode: str = "workspace_local",
+        scope_mode: str = DEFAULT_SCOPE_MODE,
     ) -> tuple[list[EpisodeRecord], dict[str, int]]: ...
 
     def candidate_integrity(
@@ -46,7 +47,7 @@ class EpisodeRepository(Protocol):
         profile_id: str,
         workspace_id: str,
         episode_ids: list[str],
-        scope_mode: str = "workspace_local",
+        scope_mode: str = DEFAULT_SCOPE_MODE,
     ) -> dict[str, dict[str, str]]: ...
 
     def register_preview_token(

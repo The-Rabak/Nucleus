@@ -10,14 +10,17 @@ from nucleus.application.context_packet import (
 )
 from nucleus.application.ports import EpisodeRepository
 from nucleus.application.readiness_store import ReadinessStore
+from nucleus.domain.constants import Stage1Operation
 from nucleus.domain.models import EpisodeRecord, RetrieveResult
-from nucleus.domain.scoping import resolve_scope_mode
+from nucleus.domain.scoping import ScopeDecision, resolve_scope_mode
 
 _MAX_TOP_K = 10
 _MAX_QUERY_LENGTH = 500
 
 
 class RetrieveUseCase:
+    """Retrieves cited memory results with explicit scope metadata."""
+
     def __init__(self, *, episode_store: EpisodeRepository, readiness_store: ReadinessStore) -> None:
         self._episode_store = episode_store
         self._readiness_store = readiness_store
@@ -31,41 +34,80 @@ class RetrieveUseCase:
         top_k: int = 5,
         scope_mode: str | None = None,
     ) -> RetrieveResult:
+        self._validate_request(query=query, top_k=top_k)
+        scope = resolve_scope_mode(scope_mode=scope_mode)
+        episodes, scan_counters, operation_duration_ms = self._search(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            query=query,
+            top_k=top_k,
+            effective_scope=scope.effective_scope,
+        )
+        readiness = self._readiness(profile_id=profile_id, workspace_id=workspace_id)
+        return self._build_result(
+            episodes=episodes,
+            scan_counters=scan_counters,
+            operation_duration_ms=operation_duration_ms,
+            scope=scope,
+            readiness=readiness,
+        )
+
+    @staticmethod
+    def _validate_request(*, query: str, top_k: int) -> None:
         if top_k < 1 or top_k > _MAX_TOP_K:
             raise ValueError(f"top_k must be between 1 and {_MAX_TOP_K}.")
         if len(query) > _MAX_QUERY_LENGTH:
             raise ValueError(f"query must be <= {_MAX_QUERY_LENGTH} characters.")
-        scope = resolve_scope_mode(scope_mode=scope_mode)
 
+    def _search(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        query: str,
+        top_k: int,
+        effective_scope: str,
+    ) -> tuple[list[EpisodeRecord], dict[str, int], float]:
         operation_started_at = time.perf_counter()
         episodes, scan_counters = self._episode_store.search(
             profile_id=profile_id,
             workspace_id=workspace_id,
             query=query,
             top_k=top_k,
-            scope_mode=scope.effective_scope,
+            scope_mode=effective_scope,
         )
-        operation_duration_ms = round((time.perf_counter() - operation_started_at) * 1000, 3)
-        results = [self._to_memory_result(item) for item in episodes]
-        evidence_status = "found" if results else "none"
-        context_packet = build_retrieve_context_packet(episodes=episodes)
-        readiness = self._readiness_store.snapshot(
+        duration_ms = round((time.perf_counter() - operation_started_at) * 1000, 3)
+        return episodes, scan_counters, duration_ms
+
+    def _readiness(self, *, profile_id: str, workspace_id: str) -> dict[str, object]:
+        return self._readiness_store.snapshot(
             profile_id=profile_id,
             workspace_id=workspace_id,
         ).to_dict()
 
+    def _build_result(
+        self,
+        *,
+        episodes: list[EpisodeRecord],
+        scan_counters: dict[str, int],
+        operation_duration_ms: float,
+        scope: ScopeDecision,
+        readiness: dict[str, object],
+    ) -> RetrieveResult:
+        results = [self._to_memory_result(item) for item in episodes]
+        evidence_status = "found" if results else "none"
         return RetrieveResult(
             retrieval_id=f"ret_{uuid.uuid4().hex[:12]}",
             evidence_status=evidence_status,
             effective_scope=scope.effective_scope,
             scope_widened=scope.scope_widened,
             results=results,
-            context_packet=context_packet,
+            context_packet=build_retrieve_context_packet(episodes=episodes),
             readiness=readiness,
             requested_scope_mode=scope.requested_scope_mode,
             scope_policy=scope.scope_policy,
             observability={
-                "operation": "retrieve",
+                "operation": Stage1Operation.RETRIEVE.value,
                 "visibility_policy": "active_only",
                 "duration_ms": operation_duration_ms,
                 "scan_counters": scan_counters,

@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-DEFAULT_SCOPE_MODE = "workspace_local"
-PROFILE_GLOBAL_SCOPE_MODE = "profile_global"
-SCOPE_POLICY = "per_request_non_sticky"
-VALID_SCOPE_MODES = {DEFAULT_SCOPE_MODE, PROFILE_GLOBAL_SCOPE_MODE}
+from nucleus.domain.constants import (
+    DEFAULT_SCOPE_MODE,
+    SCOPE_POLICY,
+    ScopeMode,
+    VALID_SCOPE_MODES,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,11 +29,13 @@ class ScopeDecision:
 def resolve_scope_mode(*, scope_mode: str | None = None) -> ScopeDecision:
     requested_scope_mode = scope_mode or DEFAULT_SCOPE_MODE
     if requested_scope_mode not in VALID_SCOPE_MODES:
-        raise ValueError("scope_mode must be one of: workspace_local, profile_global.")
+        raise ValueError(
+            f"scope_mode must be one of: {', '.join(sorted(VALID_SCOPE_MODES))}."
+        )
     return ScopeDecision(
         requested_scope_mode=requested_scope_mode,
         effective_scope=requested_scope_mode,
-        scope_widened=(requested_scope_mode == PROFILE_GLOBAL_SCOPE_MODE),
+        scope_widened=(requested_scope_mode == ScopeMode.PROFILE_GLOBAL.value),
     )
 
 

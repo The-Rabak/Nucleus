@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from nucleus.domain.constants import DEFAULT_SCOPE_MODE, SCOPE_POLICY
 from nucleus.domain.envelopes import JsonObject
 
 
@@ -30,10 +31,10 @@ class Bootcard:
     context_packet: str
     readiness: JsonObject
     observability: JsonObject = field(default_factory=dict)
-    effective_scope: str = "workspace_local"
+    effective_scope: str = DEFAULT_SCOPE_MODE
     scope_widened: bool = False
-    requested_scope_mode: str = "workspace_local"
-    scope_policy: str = "per_request_non_sticky"
+    requested_scope_mode: str = DEFAULT_SCOPE_MODE
+    scope_policy: str = SCOPE_POLICY
 
     def to_dict(self) -> JsonObject:
         return {
@@ -76,8 +77,8 @@ class RetrieveResult:
     context_packet: str
     readiness: JsonObject
     observability: JsonObject = field(default_factory=dict)
-    requested_scope_mode: str = "workspace_local"
-    scope_policy: str = "per_request_non_sticky"
+    requested_scope_mode: str = DEFAULT_SCOPE_MODE
+    scope_policy: str = SCOPE_POLICY
 
     def to_dict(self) -> JsonObject:
         return {
@@ -128,8 +129,8 @@ class InspectStatusResult:
     scope_widened: bool
     readiness: JsonObject
     latest_checkpoint: JsonObject | None
-    requested_scope_mode: str = "workspace_local"
-    scope_policy: str = "per_request_non_sticky"
+    requested_scope_mode: str = DEFAULT_SCOPE_MODE
+    scope_policy: str = SCOPE_POLICY
     warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> JsonObject:

@@ -10,13 +10,17 @@ from nucleus.application.context_packet import first_statement, redact_raw_file_
 from nucleus.application.ports import EpisodeRepository
 from nucleus.application.readiness_store import ReadinessStore
 from nucleus.application.scope_validation import validate_scope_identifier
+from nucleus.domain.constants import (
+    ScopeMode,
+    VALID_CHECKPOINT_TRIGGERS,
+)
 from nucleus.domain.envelopes import JsonObject
 from nucleus.domain.models import EpisodeRecord, SessionCheckpointResult
 
-_VALID_TRIGGERS = {"pre_compact", "stop", "manual"}
-
 
 class SessionCheckpointService:
+    """Persists and reads durable session checkpoint snapshots."""
+
     def __init__(
         self,
         *,
@@ -38,62 +42,108 @@ class SessionCheckpointService:
         idempotency_key: str,
         include_preview_tokens: bool = True,
     ) -> SessionCheckpointResult:
-        safe_profile_id = validate_scope_identifier(name="profile_id", value=profile_id)
-        safe_workspace_id = validate_scope_identifier(name="workspace_id", value=workspace_id)
-        safe_session_id = validate_scope_identifier(name="session_id", value=session_id)
-        if trigger not in _VALID_TRIGGERS:
-            raise ValueError("trigger must be one of: pre_compact, stop, manual.")
+        """Creates or reuses a deterministic checkpoint for the given session."""
+        request_args = self._checkpoint_request_args(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+            trigger=trigger,
+            idempotency_key=idempotency_key,
+        )
+        payload, idempotent = self._resolve_checkpoint_payload(
+            include_preview_tokens=include_preview_tokens,
+            **request_args,
+        )
+        return self._result_from_payload(payload, idempotent=idempotent)
 
-        normalized_key = CheckpointIdempotency.normalize(idempotency_key)
-        checkpoint_id = CheckpointIdempotency.checkpoint_id(
+    def _checkpoint_request_args(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+        trigger: str,
+        idempotency_key: str,
+    ) -> dict[str, object]:
+        safe_profile_id, safe_workspace_id, safe_session_id = self._validated_scope(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+        )
+        normalized_key = self._normalized_idempotency_key(idempotency_key=idempotency_key)
+        checkpoint_id, checkpoint_dir = self._checkpoint_identity(
             profile_id=safe_profile_id,
             workspace_id=safe_workspace_id,
             session_id=safe_session_id,
             trigger=trigger,
             idempotency_key=normalized_key,
         )
-        checkpoint_dir = self._checkpoint_dir(
-            profile_id=safe_profile_id,
-            workspace_id=safe_workspace_id,
-            session_id=safe_session_id,
-        )
-        checkpoint_dir.mkdir(parents=True, exist_ok=True)
-        self._cleanup_temp_files(checkpoint_dir)
-
-        checkpoint_path = checkpoint_dir / f"{checkpoint_id}.json"
-        existing_payload = self._safe_read_json(checkpoint_path)
-        if existing_payload is not None:
-            latest_path = checkpoint_dir / "latest.json"
-            if self._safe_read_json(latest_path) is None:
-                self._atomic_write_json(latest_path, existing_payload)
-            return self._result_from_payload(existing_payload, idempotent=True)
-
-        readiness = self._readiness_store.snapshot(
-            profile_id=safe_profile_id,
-            workspace_id=safe_workspace_id,
-        ).to_dict()
-        recent_episodes, _ = self._episode_store.list_recent(
-            profile_id=safe_profile_id,
-            workspace_id=safe_workspace_id,
-            limit=3,
-        )
-        recorded_at = datetime.now(UTC).isoformat()
-        summary = self._build_summary(trigger=trigger, episodes=recent_episodes)
-        payload: JsonObject = {
+        return {
+            "checkpoint_dir": checkpoint_dir,
             "checkpoint_id": checkpoint_id,
-            "recorded_at": recorded_at,
-            "effective_scope": "workspace_local",
-            "readiness": readiness,
+            "profile_id": safe_profile_id,
+            "workspace_id": safe_workspace_id,
             "trigger": trigger,
             "idempotency_key": normalized_key,
-            "summary": summary,
-            "citations": self._build_citations(recent_episodes),
-            "warnings": [] if include_preview_tokens else ["preview tokens were excluded"],
         }
+
+    def _checkpoint_identity(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+        trigger: str,
+        idempotency_key: str,
+    ) -> tuple[str, Path]:
+        checkpoint_id = self._checkpoint_id(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+            trigger=trigger,
+            idempotency_key=idempotency_key,
+        )
+        checkpoint_dir = self._checkpoint_dir(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+        )
+        return checkpoint_id, checkpoint_dir
+
+    def _resolve_checkpoint_payload(self, *, checkpoint_dir: Path, checkpoint_id: str, profile_id: str, workspace_id: str, trigger: str, idempotency_key: str, include_preview_tokens: bool) -> tuple[JsonObject, bool]:
+        checkpoint_dir.mkdir(parents=True, exist_ok=True)
+        self._cleanup_temp_files(checkpoint_dir)
+        existing_payload = self._existing_checkpoint(
+            checkpoint_dir=checkpoint_dir,
+            checkpoint_id=checkpoint_id,
+        )
+        if existing_payload is not None:
+            return existing_payload, True
+        payload = self._new_checkpoint_payload(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            trigger=trigger,
+            checkpoint_id=checkpoint_id,
+            idempotency_key=idempotency_key,
+            include_preview_tokens=include_preview_tokens,
+        )
+        self._persist_checkpoint_payload(
+            checkpoint_dir=checkpoint_dir,
+            checkpoint_id=checkpoint_id,
+            payload=payload,
+        )
+        return payload, False
+
+    def _persist_checkpoint_payload(
+        self,
+        *,
+        checkpoint_dir: Path,
+        checkpoint_id: str,
+        payload: JsonObject,
+    ) -> None:
+        checkpoint_path = checkpoint_dir / f"{checkpoint_id}.json"
         self._atomic_write_json(checkpoint_path, payload)
         self._atomic_write_json(checkpoint_dir / "latest.json", payload)
-
-        return self._result_from_payload(payload, idempotent=False)
 
     def latest_checkpoint(
         self,
@@ -102,9 +152,12 @@ class SessionCheckpointService:
         workspace_id: str,
         session_id: str,
     ) -> JsonObject | None:
-        safe_profile_id = validate_scope_identifier(name="profile_id", value=profile_id)
-        safe_workspace_id = validate_scope_identifier(name="workspace_id", value=workspace_id)
-        safe_session_id = validate_scope_identifier(name="session_id", value=session_id)
+        """Returns the latest checkpoint payload for a session, if present."""
+        safe_profile_id, safe_workspace_id, safe_session_id = self._validated_scope(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+        )
         checkpoint_dir = self._checkpoint_dir(
             profile_id=safe_profile_id,
             workspace_id=safe_workspace_id,
@@ -113,11 +166,100 @@ class SessionCheckpointService:
         if not checkpoint_dir.exists():
             return None
         self._cleanup_temp_files(checkpoint_dir)
-        latest_path = checkpoint_dir / "latest.json"
-        latest_payload = self._safe_read_json(latest_path)
+        latest_payload = self._safe_read_json(checkpoint_dir / "latest.json")
         if latest_payload is not None:
             return latest_payload
+        return self._latest_checkpoint_from_candidates(checkpoint_dir=checkpoint_dir)
 
+    @staticmethod
+    def _validated_scope(
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+    ) -> tuple[str, str, str]:
+        safe_profile_id = validate_scope_identifier(name="profile_id", value=profile_id)
+        safe_workspace_id = validate_scope_identifier(name="workspace_id", value=workspace_id)
+        safe_session_id = validate_scope_identifier(name="session_id", value=session_id)
+        return safe_profile_id, safe_workspace_id, safe_session_id
+
+    @staticmethod
+    def _normalized_idempotency_key(*, idempotency_key: str) -> str:
+        return CheckpointIdempotency.normalize(idempotency_key)
+
+    @staticmethod
+    def _checkpoint_id(
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+        trigger: str,
+        idempotency_key: str,
+    ) -> str:
+        if trigger not in VALID_CHECKPOINT_TRIGGERS:
+            raise ValueError(
+                "trigger must be one of: "
+                f"{', '.join(sorted(VALID_CHECKPOINT_TRIGGERS))}."
+            )
+        return CheckpointIdempotency.checkpoint_id(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            session_id=session_id,
+            trigger=trigger,
+            idempotency_key=idempotency_key,
+        )
+
+    def _existing_checkpoint(
+        self,
+        *,
+        checkpoint_dir: Path,
+        checkpoint_id: str,
+    ) -> JsonObject | None:
+        checkpoint_path = checkpoint_dir / f"{checkpoint_id}.json"
+        existing_payload = self._safe_read_json(checkpoint_path)
+        if existing_payload is None:
+            return None
+        latest_path = checkpoint_dir / "latest.json"
+        if self._safe_read_json(latest_path) is None:
+            self._atomic_write_json(latest_path, existing_payload)
+        return existing_payload
+
+    def _new_checkpoint_payload(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        trigger: str,
+        checkpoint_id: str,
+        idempotency_key: str,
+        include_preview_tokens: bool,
+    ) -> JsonObject:
+        readiness = self._readiness_store.snapshot(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+        ).to_dict()
+        recent_episodes, _ = self._episode_store.list_recent(
+            profile_id=profile_id,
+            workspace_id=workspace_id,
+            limit=3,
+        )
+        return {
+            "checkpoint_id": checkpoint_id,
+            "recorded_at": datetime.now(UTC).isoformat(),
+            "effective_scope": ScopeMode.WORKSPACE_LOCAL.value,
+            "readiness": readiness,
+            "trigger": trigger,
+            "idempotency_key": idempotency_key,
+            "summary": self._build_summary(trigger=trigger, episodes=recent_episodes),
+            "citations": self._build_citations(recent_episodes),
+            "warnings": [] if include_preview_tokens else [self._preview_token_warning()],
+        }
+
+    @staticmethod
+    def _preview_token_warning() -> str:
+        return "preview tokens were excluded"
+
+    def _latest_checkpoint_from_candidates(self, *, checkpoint_dir: Path) -> JsonObject | None:
         checkpoint_candidates = sorted(
             checkpoint_dir.glob("cp_*.json"),
             key=self._checkpoint_sort_key,
@@ -127,7 +269,7 @@ class SessionCheckpointService:
             payload = self._safe_read_json(checkpoint_path)
             if payload is None:
                 continue
-            self._atomic_write_json(latest_path, payload)
+            self._atomic_write_json(checkpoint_dir / "latest.json", payload)
             return payload
         return None
 
