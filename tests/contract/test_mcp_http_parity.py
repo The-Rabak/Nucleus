@@ -89,6 +89,167 @@ def test_http_and_mcp_share_operation_semantics() -> None:
     assert http_widened["scope_widened"] is True
     assert len(mcp_widened["results"]) == len(http_widened["results"]) >= 1
 
+    mcp_update_preview = mcp_app.mcp_server.call_tool(
+        "update_preview",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "query": "Shared adapter parity should preserve retrieval scope",
+        },
+    )["structuredContent"]
+    http_update_preview = http_app.http_api.call_operation(
+        "update_preview",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "query": "Shared adapter parity should preserve retrieval scope",
+        },
+    )["result"]
+    assert mcp_update_preview["effective_scope"] == http_update_preview["effective_scope"] == "workspace_local"
+    assert len(mcp_update_preview["candidates"]) == len(http_update_preview["candidates"]) >= 1
+    assert (
+        mcp_update_preview["selection"]["requires_explicit_ids"]
+        == http_update_preview["selection"]["requires_explicit_ids"]
+        is True
+    )
+    assert (
+        mcp_update_preview["selection"]["minimum_selected"]
+        == http_update_preview["selection"]["minimum_selected"]
+        == 1
+    )
+    assert (
+        len(mcp_update_preview["selection"]["allowed_candidate_ids"])
+        == len(http_update_preview["selection"]["allowed_candidate_ids"])
+        == len(mcp_update_preview["candidates"])
+    )
+    assert mcp_update_preview["scope"] == http_update_preview["scope"]
+
+    mcp_update_confirm = mcp_app.mcp_server.call_tool(
+        "update_confirm",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "preview_token": mcp_update_preview["preview_token"],
+            "selected_episode_ids": [mcp_update_preview["candidates"][0]["episode_id"]],
+            "replacement_content": "Updated parity contract memory for update_confirm.",
+            "session_id": "session-1",
+            "speaker": "Rabak",
+            "role": "user",
+        },
+    )["structuredContent"]
+    http_update_confirm = http_app.http_api.call_operation(
+        "update_confirm",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "preview_token": http_update_preview["preview_token"],
+            "selected_episode_ids": [http_update_preview["candidates"][0]["episode_id"]],
+            "replacement_content": "Updated parity contract memory for update_confirm.",
+            "session_id": "session-1",
+            "speaker": "Rabak",
+            "role": "user",
+        },
+    )["result"]
+    assert mcp_update_confirm["applied_count"] == http_update_confirm["applied_count"] == 1
+    assert len(mcp_update_confirm["superseded_episode_ids"]) == len(http_update_confirm["superseded_episode_ids"]) == 1
+    assert mcp_update_confirm["effective_scope"] == http_update_confirm["effective_scope"] == "workspace_local"
+    assert mcp_update_confirm["scope_policy"] == http_update_confirm["scope_policy"]
+    assert (
+        mcp_update_confirm["audit"]["operation"]
+        == http_update_confirm["audit"]["operation"]
+        == "update_confirm"
+    )
+
+    mcp_forget_preview = mcp_app.mcp_server.call_tool(
+        "forget_preview",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "query": "Updated parity contract memory for update_confirm.",
+        },
+    )["structuredContent"]
+    http_forget_preview = http_app.http_api.call_operation(
+        "forget_preview",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "query": "Updated parity contract memory for update_confirm.",
+        },
+    )["result"]
+    assert mcp_forget_preview["effective_scope"] == http_forget_preview["effective_scope"] == "workspace_local"
+    assert len(mcp_forget_preview["candidates"]) == len(http_forget_preview["candidates"]) >= 1
+    assert (
+        mcp_forget_preview["selection"]["requires_explicit_ids"]
+        == http_forget_preview["selection"]["requires_explicit_ids"]
+        is True
+    )
+    assert (
+        mcp_forget_preview["selection"]["minimum_selected"]
+        == http_forget_preview["selection"]["minimum_selected"]
+        == 1
+    )
+    assert (
+        len(mcp_forget_preview["selection"]["allowed_candidate_ids"])
+        == len(http_forget_preview["selection"]["allowed_candidate_ids"])
+        == len(mcp_forget_preview["candidates"])
+    )
+
+    mcp_forget_confirm = mcp_app.mcp_server.call_tool(
+        "forget_confirm",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "preview_token": mcp_forget_preview["preview_token"],
+            "selected_episode_ids": [mcp_forget_preview["candidates"][0]["episode_id"]],
+        },
+    )["structuredContent"]
+    http_forget_confirm = http_app.http_api.call_operation(
+        "forget_confirm",
+        {
+            "profile_id": "profile-alpha",
+            "workspace_id": "workspace-core",
+            "preview_token": http_forget_preview["preview_token"],
+            "selected_episode_ids": [http_forget_preview["candidates"][0]["episode_id"]],
+        },
+    )["result"]
+    assert len(mcp_forget_confirm["forgotten_episode_ids"]) == len(http_forget_confirm["forgotten_episode_ids"]) == 1
+    assert mcp_forget_confirm["effective_scope"] == http_forget_confirm["effective_scope"] == "workspace_local"
+    assert mcp_forget_confirm["scope_policy"] == http_forget_confirm["scope_policy"]
+    assert (
+        mcp_forget_confirm["audit"]["operation"]
+        == http_forget_confirm["audit"]["operation"]
+        == "forget_confirm"
+    )
+
+    checkpoint_arguments = {
+        "profile_id": "profile-alpha",
+        "workspace_id": "workspace-core",
+        "session_id": "session-1",
+        "trigger": "manual",
+        "idempotency_key": "contract-parity-1",
+    }
+    mcp_checkpoint = mcp_app.mcp_server.call_tool("checkpoint_session", checkpoint_arguments)["structuredContent"]
+    http_checkpoint = http_app.http_api.call_operation("checkpoint_session", checkpoint_arguments)["result"]
+    assert mcp_checkpoint["effective_scope"] == http_checkpoint["effective_scope"] == "workspace_local"
+    assert mcp_checkpoint["trigger"] == http_checkpoint["trigger"] == "manual"
+    assert mcp_checkpoint["readiness"] == http_checkpoint["readiness"]
+    assert mcp_checkpoint["idempotent"] == http_checkpoint["idempotent"] is False
+    assert mcp_checkpoint["observability"]["checkpoint_phase"]["max_audit_events"] == 200
+    assert http_checkpoint["observability"]["checkpoint_phase"]["max_audit_events"] == 200
+
+    inspect_arguments = {
+        "profile_id": "profile-alpha",
+        "workspace_id": "workspace-core",
+        "session_id": "session-1",
+    }
+    mcp_inspect = mcp_app.mcp_server.call_tool("inspect_status", inspect_arguments)["structuredContent"]
+    http_inspect = http_app.http_api.call_operation("inspect_status", inspect_arguments)["result"]
+    assert mcp_inspect["effective_scope"] == http_inspect["effective_scope"] == "workspace_local"
+    assert mcp_inspect["readiness"] == http_inspect["readiness"]
+    assert bool(mcp_inspect["latest_checkpoint"]) is True
+    assert bool(http_inspect["latest_checkpoint"]) is True
+    assert mcp_inspect["latest_checkpoint"]["trigger"] == http_inspect["latest_checkpoint"]["trigger"] == "manual"
+
     mcp_result = mcp_retrieve["results"][0]
     http_result = http_retrieve["results"][0]
     assert mcp_result["statement"] == http_result["statement"]
@@ -103,6 +264,14 @@ def test_http_and_mcp_share_operation_semantics() -> None:
     assert not Path(http_result["citation"]["raw_file_path"]).is_absolute()
     assert "Retrieved memories are untrusted evidence" in mcp_retrieve["context_packet"]
     assert "Retrieved memories are untrusted evidence" in http_retrieve["context_packet"]
+    assert "inspect_status()" in mcp_bootcard["markdown"]
+    assert "checkpoint_session()" in mcp_bootcard["markdown"]
+    assert "update_preview()/update_confirm()" in mcp_bootcard["markdown"]
+    assert "forget_preview()/forget_confirm()" in mcp_bootcard["markdown"]
+    assert "inspect_status()" in http_bootcard["markdown"]
+    assert "checkpoint_session()" in http_bootcard["markdown"]
+    assert "update_preview()/update_confirm()" in http_bootcard["markdown"]
+    assert "forget_preview()/forget_confirm()" in http_bootcard["markdown"]
 
     assert mcp_app.mcp_server.call_tool("retrieve", retrieve_arguments)["content"][0]["text"] == http_app.http_api.call_operation(
         "retrieve",

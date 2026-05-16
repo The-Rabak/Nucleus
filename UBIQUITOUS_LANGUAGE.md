@@ -83,6 +83,18 @@ Nucleus terminology should be used in brainstorms, architecture artifacts, contr
 | **Context Packet** | Prompt-ready fenced block containing cited evidence snippets, separate from structured retrieval results. | answer context, synthesized answer |
 | **Citation** | Machine-readable pointer from a retrieval result to evidence span, episode, source metadata, raw file path or evidence capsule. | provenance, source, reference |
 
+## Phase 2 Scope And Mutation Safety
+
+| Term | Definition | Aliases to avoid |
+| --- | --- | --- |
+| **Scope Mode (`scope_mode`)** | Explicit request parameter that controls whether a read or mutation preview runs against workspace-only or profile-wide candidates. | scope, widen flag, global toggle |
+| **Scope Policy (`scope_policy`)** | Declared enforcement rule for scope handling; Phase 2 uses `per_request_non_sticky` so scope widening applies only to the current request. | scope config, sticky scope, session scope mode |
+| **`workspace_local`** | Scope mode value that limits candidates and effects to the active workspace context. | local mode, default scope, project-only (without token) |
+| **`profile_global`** | Scope mode value that allows profile-wide candidate selection beyond the active workspace. | global mode, account-wide scope, tenant-global |
+| **Preview Token** | Short-lived signed mutation preview credential (`preview_token`) returned by preview operations and required by confirm operations. | draft id, mutation id, one-time code |
+| **Preview Token Claims** | Canonical payload fields carried by a preview token (`token_id`, operation, profile/workspace IDs, scope mode, timestamps, candidate integrity). | token metadata, token payload blob |
+| **Candidate Integrity** | Deterministic candidate fingerprint map embedded in preview token claims and checked at confirm time to prevent drift between preview and apply. | checksum only, optimistic lock id |
+
 ## Derived Artifacts And Future Systems
 
 | Term | Definition | Aliases to avoid |

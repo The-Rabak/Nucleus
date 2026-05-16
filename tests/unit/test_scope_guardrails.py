@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from nucleus.adapters.filesystem.episode_store import EpisodeStore
 from nucleus.infra.app_factory import create_app
 from nucleus.testing.sandbox import reset_sandbox
 
@@ -33,6 +34,7 @@ def test_server_scope_binding_rejects_cross_scope_requests(monkeypatch: pytest.M
     data_root = reset_sandbox(Path("tests/.sandbox/unit_scope_guardrails_binding"))
     monkeypatch.setenv("NUCLEUS_PROFILE_ID", "profile-alpha")
     monkeypatch.setenv("NUCLEUS_WORKSPACE_ID", "workspace-core")
+    monkeypatch.setenv("NUCLEUS_REQUIRE_BOUND_SCOPE", "true")
     app = create_app(data_root=data_root)
 
     with pytest.raises(ValueError, match="profile_id is outside the configured server scope"):
@@ -55,4 +57,47 @@ def test_server_scope_binding_rejects_cross_scope_requests(monkeypatch: pytest.M
                 "query": "cross-workspace read",
                 "scope_mode": "profile_global",
             },
+        )
+
+
+def test_server_scope_binding_fails_closed_when_scope_not_bound(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    data_root = reset_sandbox(Path("tests/.sandbox/unit_scope_guardrails_fail_closed"))
+    monkeypatch.delenv("NUCLEUS_PROFILE_ID", raising=False)
+    monkeypatch.delenv("NUCLEUS_WORKSPACE_ID", raising=False)
+    monkeypatch.setenv("NUCLEUS_REQUIRE_BOUND_SCOPE", "true")
+    app = create_app(data_root=data_root)
+
+    with pytest.raises(ValueError, match="Authenticated scope binding is required"):
+        app.mcp_server.call_tool(
+            "retrieve",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "query": "must fail closed without authenticated binding",
+            },
+        )
+
+    with pytest.raises(ValueError, match="Authenticated scope binding is required"):
+        app.http_api.call_operation(
+            "retrieve",
+            {
+                "profile_id": "profile-alpha",
+                "workspace_id": "workspace-core",
+                "query": "must fail closed without authenticated binding",
+            },
+        )
+
+
+def test_episode_store_rejects_unknown_scope_mode() -> None:
+    data_root = reset_sandbox(Path("tests/.sandbox/unit_scope_guardrails_scope_mode"))
+    store = EpisodeStore(data_root=data_root)
+
+    with pytest.raises(ValueError, match="scope_mode must be one of"):
+        store.search(
+            profile_id="profile-alpha",
+            workspace_id="workspace-core",
+            query="anything",
+            scope_mode="global",
         )
