@@ -1,0 +1,18 @@
+---
+episode_id: "ep_86c6fcd2cb0f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.562423+00:00"
+ingested_at: "2026-05-14T20:26:27.562423+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.562423+00:00"
+content_hash: "sha256:b5d374f6e95ffb59fec1a1213887dac50168e7619f0322bbb5848b76fbed9c54"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2170 is approved for Q2.

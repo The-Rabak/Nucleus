@@ -1,0 +1,18 @@
+---
+episode_id: "ep_c8a1ecea4795"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.965045+00:00"
+ingested_at: "2026-05-14T20:26:34.965045+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.965045+00:00"
+content_hash: "sha256:75715f389432b088220ff203292f49d281f4c4ac069cd87c0464c3d94d6c3292"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1243 is approved for Q3.

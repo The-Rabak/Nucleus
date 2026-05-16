@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ee4b06b13c4a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.855520+00:00"
+ingested_at: "2026-05-14T20:26:34.855520+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.855520+00:00"
+content_hash: "sha256:92b15ce9475628700f7548cc727a016e3cefcebccbefda53a2da390a7e3f37bc"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 780 is approved for Q0.

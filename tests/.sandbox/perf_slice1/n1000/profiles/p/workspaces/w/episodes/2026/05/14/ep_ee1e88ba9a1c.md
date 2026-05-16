@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ee1e88ba9a1c"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.307280+00:00"
+ingested_at: "2026-05-14T20:26:16.307280+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.307280+00:00"
+content_hash: "sha256:7107785e33009ff521d63e8ef91b8f792fea2a99bf66fd4448bb6ca87bd7d96e"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 381 is approved for Q1.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_91cafb6aaad1"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.848247+00:00"
+ingested_at: "2026-05-14T20:26:34.848247+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.848247+00:00"
+content_hash: "sha256:bde78588056ab1bf4ecf97556bcaf4279658ebd69465f663159c4e76289346b3"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 745 is approved for Q1.

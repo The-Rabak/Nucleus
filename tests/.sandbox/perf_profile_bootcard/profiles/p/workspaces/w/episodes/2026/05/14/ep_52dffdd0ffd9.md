@@ -1,0 +1,18 @@
+---
+episode_id: "ep_52dffdd0ffd9"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.957580+00:00"
+ingested_at: "2026-05-14T20:26:34.957580+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.957580+00:00"
+content_hash: "sha256:fff56d5b03bc1f98a71c18b72b94e7e10d9f265c7004b4f53ff86c2384cc3aff"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1211 is approved for Q3.

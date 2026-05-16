@@ -1,0 +1,5 @@
+docs/**
+!docs/
+!docs/architecture/
+!docs/architecture/**
+!docs/constitution.md

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_cb3c109d76bd"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.449172+00:00"
+ingested_at: "2026-05-14T20:26:16.449172+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.449172+00:00"
+content_hash: "sha256:41994efaae14584185ee37c79859a60e7c10ff7b966d79cfd791a109e956d60a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 948 is approved for Q0.

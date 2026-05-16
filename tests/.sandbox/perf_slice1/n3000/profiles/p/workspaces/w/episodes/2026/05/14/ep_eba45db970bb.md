@@ -1,0 +1,18 @@
+---
+episode_id: "ep_eba45db970bb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.045582+00:00"
+ingested_at: "2026-05-14T20:26:17.045582+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.045582+00:00"
+content_hash: "sha256:7d5e209597a1f46533503f26c5fe30b97ae40f40e66cc0254d2bf960dbc1f039"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1900 is approved for Q0.

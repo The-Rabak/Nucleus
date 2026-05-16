@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d6a1f470ed0f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.922109+00:00"
+ingested_at: "2026-05-14T20:26:34.922109+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.922109+00:00"
+content_hash: "sha256:82df514af7dce129bb08db5a167426d619a28f80fd4ed5eccf277d94d4d5c63a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1060 is approved for Q0.

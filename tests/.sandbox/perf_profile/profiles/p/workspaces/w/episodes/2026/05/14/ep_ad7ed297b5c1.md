@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ad7ed297b5c1"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.590775+00:00"
+ingested_at: "2026-05-14T20:26:27.590775+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.590775+00:00"
+content_hash: "sha256:b31ba1c2b1cedd84aed75ad292ecc9f8538ecde9031f73e5504790e4f910a254"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2294 is approved for Q2.

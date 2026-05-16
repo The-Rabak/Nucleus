@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ed580ca5ac51"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.219514+00:00"
+ingested_at: "2026-05-14T20:26:16.219514+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.219514+00:00"
+content_hash: "sha256:8eb573f614dc7309d2538c921b9c45375ead87eb6cea64ec4e9bc2523c9e2875"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 52 is approved for Q0.

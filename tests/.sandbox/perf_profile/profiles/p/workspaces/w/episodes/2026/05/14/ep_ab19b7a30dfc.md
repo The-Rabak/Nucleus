@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ab19b7a30dfc"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.290596+00:00"
+ingested_at: "2026-05-14T20:26:27.290596+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.290596+00:00"
+content_hash: "sha256:683bd1f9f790f99ec673a7251224ab27f305851e4d01f4c64703734d4fcd2fb2"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 924 is approved for Q0.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_bbe0ca076e4b"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.124327+00:00"
+ingested_at: "2026-05-14T20:26:27.124327+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.124327+00:00"
+content_hash: "sha256:89af684d779f789b7ba6e082844060714c378f508acc2f4743eb9d57e867ae0f"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 197 is approved for Q1.

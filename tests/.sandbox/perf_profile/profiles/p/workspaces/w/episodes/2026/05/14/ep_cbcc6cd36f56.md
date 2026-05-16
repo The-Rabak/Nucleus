@@ -1,0 +1,18 @@
+---
+episode_id: "ep_cbcc6cd36f56"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.533966+00:00"
+ingested_at: "2026-05-14T20:26:27.533966+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.533966+00:00"
+content_hash: "sha256:12ab336e10c6212bc83f15b98cc9f9e2672fe095d88a0389bfa297a159b444f4"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2064 is approved for Q0.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_26261bcabeb1"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.255874+00:00"
+ingested_at: "2026-05-14T20:26:16.255874+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.255874+00:00"
+content_hash: "sha256:8f75dcbcba8a306b1c4d51be200ac07512aed0b8177e897b0fde5c88f12dddd2"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 175 is approved for Q3.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_44bdbf9df8c8"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.866922+00:00"
+ingested_at: "2026-05-14T20:24:25.866922+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.866922+00:00"
+content_hash: "sha256:8646663a43a6469700e44061af790486d942605986e9a32a91a81260f514332a"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 330 content

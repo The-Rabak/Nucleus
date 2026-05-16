@@ -1,0 +1,18 @@
+---
+episode_id: "ep_385dafefcc59"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.268267+00:00"
+ingested_at: "2026-05-14T20:26:17.268267+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.268267+00:00"
+content_hash: "sha256:b835fa922c6e7b887f51185a837a483c46a044548493a4771d55cb615565a161"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2872 is approved for Q0.

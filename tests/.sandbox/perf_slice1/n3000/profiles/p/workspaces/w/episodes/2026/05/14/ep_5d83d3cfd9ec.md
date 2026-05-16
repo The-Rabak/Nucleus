@@ -1,0 +1,18 @@
+---
+episode_id: "ep_5d83d3cfd9ec"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.173003+00:00"
+ingested_at: "2026-05-14T20:26:17.173003+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.173003+00:00"
+content_hash: "sha256:3f67d396e845a62e641f7a31cc6fbe6e3a49d4ec93c6ecb63b09a790cadc6417"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2478 is approved for Q2.

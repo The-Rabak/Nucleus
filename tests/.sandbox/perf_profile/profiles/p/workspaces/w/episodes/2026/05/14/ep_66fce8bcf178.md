@@ -1,0 +1,18 @@
+---
+episode_id: "ep_66fce8bcf178"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.361652+00:00"
+ingested_at: "2026-05-14T20:26:27.361652+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.361652+00:00"
+content_hash: "sha256:56fa11dd8ff95b2c0db1f426cc8362776a7190a2d686131c2211d3b95abb51ce"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1285 is approved for Q1.

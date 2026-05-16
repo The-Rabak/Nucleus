@@ -1,0 +1,18 @@
+---
+episode_id: "ep_aeb80dcee759"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.625694+00:00"
+ingested_at: "2026-05-14T20:26:27.625694+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.625694+00:00"
+content_hash: "sha256:ed4719fdceeff8074e1341637fde31f01620c12bd2ebc69a23ffef64daf0c302"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2453 is approved for Q1.

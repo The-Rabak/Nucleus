@@ -1,0 +1,18 @@
+---
+episode_id: "ep_258eead0afba"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.285597+00:00"
+ingested_at: "2026-05-14T20:26:17.285597+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.285597+00:00"
+content_hash: "sha256:889480b2bc4ab145e7480b6fb1a13909a1c0fb096daaf7b417b282272407a947"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2941 is approved for Q1.

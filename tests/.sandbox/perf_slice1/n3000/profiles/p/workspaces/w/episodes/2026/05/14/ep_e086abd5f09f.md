@@ -1,0 +1,18 @@
+---
+episode_id: "ep_e086abd5f09f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.682647+00:00"
+ingested_at: "2026-05-14T20:26:16.682647+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.682647+00:00"
+content_hash: "sha256:65ebd7cc1aed2de0dd15b9936bc0d7fb1b3ce31216d871730d51363d070ea852"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 144 is approved for Q0.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_8424f1eeee9a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.974987+00:00"
+ingested_at: "2026-05-14T20:26:34.974987+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.974987+00:00"
+content_hash: "sha256:07a4982f61fad31b676741c2cdbc6b2083f0b836862fc3a4a18a79605c8aea10"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1284 is approved for Q0.

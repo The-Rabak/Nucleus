@@ -1,0 +1,18 @@
+---
+episode_id: "ep_3d7939a5fbea"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.764761+00:00"
+ingested_at: "2026-05-14T20:26:16.764761+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.764761+00:00"
+content_hash: "sha256:5853a7150aabca22895de1039a744bb7453dbc7e614c6dbb63d22f10d94423e2"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 513 is approved for Q1.

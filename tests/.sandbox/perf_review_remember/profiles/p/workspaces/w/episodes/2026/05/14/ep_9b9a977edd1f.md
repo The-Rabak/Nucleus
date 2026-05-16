@@ -1,0 +1,18 @@
+---
+episode_id: "ep_9b9a977edd1f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.143760+00:00"
+ingested_at: "2026-05-14T20:24:26.143760+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.143760+00:00"
+content_hash: "sha256:49d98f04019bc56efec17a11bd03b21c9c0697af8fd7601565217c9be17c2d9e"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 590 content

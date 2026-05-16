@@ -1,0 +1,18 @@
+---
+episode_id: "ep_bbbfff5e8a26"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.317899+00:00"
+ingested_at: "2026-05-14T20:26:27.317899+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.317899+00:00"
+content_hash: "sha256:6d4b20ed9ae92beb8adbbf8b038c592a555dd77d003f2df2fa81a292e3f4c8f8"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1075 is approved for Q3.

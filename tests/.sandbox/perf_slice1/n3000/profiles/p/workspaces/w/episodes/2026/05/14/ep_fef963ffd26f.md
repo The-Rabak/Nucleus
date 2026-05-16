@@ -1,0 +1,18 @@
+---
+episode_id: "ep_fef963ffd26f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.997685+00:00"
+ingested_at: "2026-05-14T20:26:16.997685+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.997685+00:00"
+content_hash: "sha256:ee967d4776c7484fcaa38d7d48d18adec71792de59e79bdc356ebe47752e5d64"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1644 is approved for Q0.

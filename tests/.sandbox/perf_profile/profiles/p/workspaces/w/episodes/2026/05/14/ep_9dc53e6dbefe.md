@@ -1,0 +1,18 @@
+---
+episode_id: "ep_9dc53e6dbefe"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.143490+00:00"
+ingested_at: "2026-05-14T20:26:27.143490+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.143490+00:00"
+content_hash: "sha256:aaeceb22b771a4aefbb97208d7ec295071a2f43997d05ec52274d3eb28cb5f5b"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 296 is approved for Q0.

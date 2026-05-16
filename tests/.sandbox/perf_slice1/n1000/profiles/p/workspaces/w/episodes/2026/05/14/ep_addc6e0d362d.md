@@ -1,0 +1,18 @@
+---
+episode_id: "ep_addc6e0d362d"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.232093+00:00"
+ingested_at: "2026-05-14T20:26:16.232093+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.232093+00:00"
+content_hash: "sha256:b0af142aee4c6a5ff35c237b353631cce6298540e740f22ea037a6a47b698617"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 101 is approved for Q1.

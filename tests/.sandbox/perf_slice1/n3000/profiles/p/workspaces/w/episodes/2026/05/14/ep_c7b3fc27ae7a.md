@@ -1,0 +1,18 @@
+---
+episode_id: "ep_c7b3fc27ae7a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.895168+00:00"
+ingested_at: "2026-05-14T20:26:16.895168+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.895168+00:00"
+content_hash: "sha256:1f176d45d55da53a5a5839067268ed692dee40c14fd38bfadde11352f12c5a73"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1103 is approved for Q3.

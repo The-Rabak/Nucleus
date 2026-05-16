@@ -1,0 +1,18 @@
+---
+episode_id: "ep_be55efe5d55a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.034874+00:00"
+ingested_at: "2026-05-14T20:26:35.034874+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.034874+00:00"
+content_hash: "sha256:6d25ecfa3e765ee8ecf1d6b98b667d99007e603c29710f79bc6dc6702fe75dec"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1524 is approved for Q0.

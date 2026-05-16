@@ -1,0 +1,18 @@
+---
+episode_id: "ep_c29cc46ece93"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.760806+00:00"
+ingested_at: "2026-05-14T20:26:34.760806+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.760806+00:00"
+content_hash: "sha256:e06cc0e083175c49a040e04f3f2cf071b8f7fbc2fc7df1fab547edfd47f9eaaa"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 427 is approved for Q3.

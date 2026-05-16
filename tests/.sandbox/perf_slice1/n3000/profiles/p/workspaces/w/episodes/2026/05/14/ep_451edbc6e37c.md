@@ -1,0 +1,18 @@
+---
+episode_id: "ep_451edbc6e37c"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.647064+00:00"
+ingested_at: "2026-05-14T20:26:16.647064+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.647064+00:00"
+content_hash: "sha256:3753a41ce6136c1d113ccb25eae003a01289e535661afc9d97e9c2701548bf58"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 14 is approved for Q2.

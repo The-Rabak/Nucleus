@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b0ae3dd8eb24"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.593066+00:00"
+ingested_at: "2026-05-14T20:26:27.593066+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.593066+00:00"
+content_hash: "sha256:cb599c48226944c4376732c3cac1c1986d6e80da22e5c7cd23e08489f743ebbf"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2306 is approved for Q2.

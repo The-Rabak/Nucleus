@@ -1,0 +1,18 @@
+---
+episode_id: "ep_0d7a30f7c7fe"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.140824+00:00"
+ingested_at: "2026-05-14T20:24:26.140824+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.140824+00:00"
+content_hash: "sha256:5935a0ee0670ebbe58a1a30de18989ab71370cfadcefa2a64f28215a9a009b94"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 574 content

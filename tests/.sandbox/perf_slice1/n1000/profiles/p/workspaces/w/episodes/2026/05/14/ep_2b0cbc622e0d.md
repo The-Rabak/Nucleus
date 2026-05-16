@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2b0cbc622e0d"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.385593+00:00"
+ingested_at: "2026-05-14T20:26:16.385593+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.385593+00:00"
+content_hash: "sha256:9f09d5ed96908e6ffa659f68c0ef17de2f65037c8e873bf5fc80f2dfa53f2be6"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 678 is approved for Q2.

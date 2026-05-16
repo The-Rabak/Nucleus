@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b21c3f2e9dde"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.044037+00:00"
+ingested_at: "2026-05-14T20:24:26.044037+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.044037+00:00"
+content_hash: "sha256:da10727a2a26a799d5b0a3432ef1e325ca6b9b8d72e8c563fe7660e2340538a3"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 167 content

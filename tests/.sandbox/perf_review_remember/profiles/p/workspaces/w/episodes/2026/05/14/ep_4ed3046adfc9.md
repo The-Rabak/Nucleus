@@ -1,0 +1,18 @@
+---
+episode_id: "ep_4ed3046adfc9"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.020453+00:00"
+ingested_at: "2026-05-14T20:24:26.020453+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.020453+00:00"
+content_hash: "sha256:dc971f6da7d5803c553c99907688f9793e3cdabad934d563d3b26e38cdb8bf55"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 41 content

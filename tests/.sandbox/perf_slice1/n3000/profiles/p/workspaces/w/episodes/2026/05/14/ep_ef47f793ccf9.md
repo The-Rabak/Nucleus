@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ef47f793ccf9"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.702028+00:00"
+ingested_at: "2026-05-14T20:26:16.702028+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.702028+00:00"
+content_hash: "sha256:3f8aa0bee20a739dd1a34d4e0c0ad5a8784ffdd5f8e6e069cb31ccaa564ed7a9"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 223 is approved for Q3.

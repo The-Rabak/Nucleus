@@ -1,0 +1,18 @@
+---
+episode_id: "ep_0d2f444de0fa"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.805065+00:00"
+ingested_at: "2026-05-14T20:26:16.805065+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.805065+00:00"
+content_hash: "sha256:eaf50cb9eee7f89c1c7ed5b4926109d083437b9890cdfab814c53d93f8140b56"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 674 is approved for Q2.

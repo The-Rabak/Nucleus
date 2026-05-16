@@ -1,0 +1,18 @@
+---
+episode_id: "ep_54a0a1c7eae3"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.281684+00:00"
+ingested_at: "2026-05-14T20:26:27.281684+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.281684+00:00"
+content_hash: "sha256:91407c9435d2aba47631951a8d5310014dad222a7fdd4eb9a4a71005963733aa"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 879 is approved for Q3.

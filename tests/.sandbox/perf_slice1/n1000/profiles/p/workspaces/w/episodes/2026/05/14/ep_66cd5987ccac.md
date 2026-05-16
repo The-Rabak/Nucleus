@@ -1,0 +1,18 @@
+---
+episode_id: "ep_66cd5987ccac"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.301832+00:00"
+ingested_at: "2026-05-14T20:26:16.301832+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.301832+00:00"
+content_hash: "sha256:7bb2a666e69329d307c0317def0b8928e17a2b3c6eccfd8077ce5d312d7162b2"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 360 is approved for Q0.

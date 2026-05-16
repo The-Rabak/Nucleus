@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f7f1fff3ba48"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.366171+00:00"
+ingested_at: "2026-05-14T20:26:35.366171+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.366171+00:00"
+content_hash: "sha256:ca9c8966172d4027315b371c87603b2e30161a932c039d3f424cb6494c839c3a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2758 is approved for Q2.

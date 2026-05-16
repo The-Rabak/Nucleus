@@ -1,0 +1,18 @@
+---
+episode_id: "ep_9e6f6ed6ba08"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.838492+00:00"
+ingested_at: "2026-05-14T20:24:25.838492+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.838492+00:00"
+content_hash: "sha256:1de5e76169eb363b0bcc1d3498115c9829785fa6a2679f6204806b47584d5e1a"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 223 content

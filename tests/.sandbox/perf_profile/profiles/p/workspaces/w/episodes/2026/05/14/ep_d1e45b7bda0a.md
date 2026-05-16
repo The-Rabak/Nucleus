@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d1e45b7bda0a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.671758+00:00"
+ingested_at: "2026-05-14T20:26:27.671758+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.671758+00:00"
+content_hash: "sha256:984df672e9b0252013023a991f16a1c9390185896774bfea66baa7e501f2c117"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2640 is approved for Q0.

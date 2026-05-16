@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d055eba6ea67"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.796968+00:00"
+ingested_at: "2026-05-14T20:26:16.796968+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.796968+00:00"
+content_hash: "sha256:dbd30fdb2deb1ad20c89e1a0d9645c7521a59bb0145473c3236865fb1c4a3bd2"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 636 is approved for Q0.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2c68da8ad6ab"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.231766+00:00"
+ingested_at: "2026-05-14T20:26:27.231766+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.231766+00:00"
+content_hash: "sha256:c2cc4a08ab1820391fe999f2c85738a98265447ddeee61fec821391e1a2c2663"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 651 is approved for Q3.

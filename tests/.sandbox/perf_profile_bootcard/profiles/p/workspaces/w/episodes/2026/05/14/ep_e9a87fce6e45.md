@@ -1,0 +1,18 @@
+---
+episode_id: "ep_e9a87fce6e45"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.413507+00:00"
+ingested_at: "2026-05-14T20:26:35.413507+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.413507+00:00"
+content_hash: "sha256:92bccfaf8f195ab41738410a230aa511ed0d27db0167abcf922a963523eb65f0"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2973 is approved for Q1.

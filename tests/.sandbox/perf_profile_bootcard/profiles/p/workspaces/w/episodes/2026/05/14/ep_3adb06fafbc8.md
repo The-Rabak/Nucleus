@@ -1,0 +1,18 @@
+---
+episode_id: "ep_3adb06fafbc8"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.189023+00:00"
+ingested_at: "2026-05-14T20:26:35.189023+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.189023+00:00"
+content_hash: "sha256:6ce982c99da8070a39da282fb2783e40a5c9cf0f08f46e97e4eeb3120761b372"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2092 is approved for Q0.

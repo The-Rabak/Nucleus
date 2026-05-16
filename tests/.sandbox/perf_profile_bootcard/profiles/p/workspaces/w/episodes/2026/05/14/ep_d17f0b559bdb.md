@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d17f0b559bdb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.907754+00:00"
+ingested_at: "2026-05-14T20:26:34.907754+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.907754+00:00"
+content_hash: "sha256:b7a4d19ba8f9345fc8253d6f231fcbebd777c8ffd5d0ccc0f628c186e3a83655"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 992 is approved for Q0.

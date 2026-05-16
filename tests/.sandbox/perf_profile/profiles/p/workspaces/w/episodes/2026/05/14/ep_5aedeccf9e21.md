@@ -1,0 +1,18 @@
+---
+episode_id: "ep_5aedeccf9e21"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.309954+00:00"
+ingested_at: "2026-05-14T20:26:27.309954+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.309954+00:00"
+content_hash: "sha256:fd0f130032b0a61f276f4a9aa658b6505d1d8a39e00428dd2fbaba6639024ea1"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1030 is approved for Q2.

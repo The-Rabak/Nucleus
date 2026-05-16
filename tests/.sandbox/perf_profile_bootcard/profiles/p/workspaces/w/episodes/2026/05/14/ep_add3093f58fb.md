@@ -1,0 +1,18 @@
+---
+episode_id: "ep_add3093f58fb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.926474+00:00"
+ingested_at: "2026-05-14T20:26:34.926474+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.926474+00:00"
+content_hash: "sha256:899d3dd37179cafc6c4695d91be042d55f11c6a1b63b9f363655c6394df4a768"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1080 is approved for Q0.

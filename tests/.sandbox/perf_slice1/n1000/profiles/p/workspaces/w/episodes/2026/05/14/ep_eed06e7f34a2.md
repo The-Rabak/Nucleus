@@ -1,0 +1,18 @@
+---
+episode_id: "ep_eed06e7f34a2"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.336444+00:00"
+ingested_at: "2026-05-14T20:26:16.336444+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.336444+00:00"
+content_hash: "sha256:5026bfd0b54353eacf511b24be39a355aa9a08bb4b78d81a86caf31fdd1c69b1"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 504 is approved for Q0.

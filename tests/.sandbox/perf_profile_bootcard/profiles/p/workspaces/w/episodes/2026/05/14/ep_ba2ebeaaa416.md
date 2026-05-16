@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ba2ebeaaa416"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.026624+00:00"
+ingested_at: "2026-05-14T20:26:35.026624+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.026624+00:00"
+content_hash: "sha256:0fdc1878e3b7a73351d1d397a2dd8d81b7051c337d08a736c45d7c5fee331502"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1483 is approved for Q3.

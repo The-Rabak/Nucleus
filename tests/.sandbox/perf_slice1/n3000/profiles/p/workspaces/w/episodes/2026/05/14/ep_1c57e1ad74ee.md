@@ -1,0 +1,18 @@
+---
+episode_id: "ep_1c57e1ad74ee"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.807538+00:00"
+ingested_at: "2026-05-14T20:26:16.807538+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.807538+00:00"
+content_hash: "sha256:9af1445580105cee67d80f7c8df8b74307df682a3eec323a7ad72b424f4fac3e"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 687 is approved for Q3.

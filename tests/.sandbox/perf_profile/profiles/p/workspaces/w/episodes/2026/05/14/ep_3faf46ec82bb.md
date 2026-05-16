@@ -1,0 +1,18 @@
+---
+episode_id: "ep_3faf46ec82bb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.675476+00:00"
+ingested_at: "2026-05-14T20:26:27.675476+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.675476+00:00"
+content_hash: "sha256:33272e03514bab1a47a08f923faaf8fecd6e02282718eb6b4bd6c5aec7f9e0dd"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2656 is approved for Q0.

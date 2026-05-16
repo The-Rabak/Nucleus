@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2e7c15dba0cb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.981728+00:00"
+ingested_at: "2026-05-14T20:24:25.981728+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.981728+00:00"
+content_hash: "sha256:7e7dc6f38dc76b93fda140895809ed4496a78ddcbe57ff511f6430da5b0d79d2"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 844 content

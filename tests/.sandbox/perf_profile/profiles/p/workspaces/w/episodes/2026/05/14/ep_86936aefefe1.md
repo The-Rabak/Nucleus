@@ -1,0 +1,18 @@
+---
+episode_id: "ep_86936aefefe1"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.105440+00:00"
+ingested_at: "2026-05-14T20:26:27.105440+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.105440+00:00"
+content_hash: "sha256:9d2d79dcebc334aafef541aba2ef7c4e76ca8573bf096b8a0801d424d0ce4692"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 91 is approved for Q3.

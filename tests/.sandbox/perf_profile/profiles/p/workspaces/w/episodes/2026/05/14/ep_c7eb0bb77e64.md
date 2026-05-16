@@ -1,0 +1,18 @@
+---
+episode_id: "ep_c7eb0bb77e64"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.735745+00:00"
+ingested_at: "2026-05-14T20:26:27.735745+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.735745+00:00"
+content_hash: "sha256:aab30d70b9fdf86597e8e7e55ae7300632ca0c5bc0f1dcd8bdfe4a113da0330a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2942 is approved for Q2.

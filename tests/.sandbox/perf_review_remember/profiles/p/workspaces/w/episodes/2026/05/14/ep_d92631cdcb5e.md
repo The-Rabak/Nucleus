@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d92631cdcb5e"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.964369+00:00"
+ingested_at: "2026-05-14T20:24:25.964369+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.964369+00:00"
+content_hash: "sha256:037c0cac92bcb15d16856943a6a36bdd7e64e5c5221f0f3d5593502e6cf2e2e9"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 766 content

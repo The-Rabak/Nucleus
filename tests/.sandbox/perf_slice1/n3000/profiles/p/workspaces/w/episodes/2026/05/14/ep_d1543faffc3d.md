@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d1543faffc3d"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.678182+00:00"
+ingested_at: "2026-05-14T20:26:16.678182+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.678182+00:00"
+content_hash: "sha256:13cc97f5a223734bf3e094b2fc42ad418becc1e3b185c759c4eb4dba1f4c4c2a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 125 is approved for Q1.

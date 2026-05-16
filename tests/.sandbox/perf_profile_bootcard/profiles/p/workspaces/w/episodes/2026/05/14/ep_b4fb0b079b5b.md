@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b4fb0b079b5b"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.090988+00:00"
+ingested_at: "2026-05-14T20:26:35.090988+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.090988+00:00"
+content_hash: "sha256:69aac68d6480563265a6a2f329baf7dcbf4c41e448a76217ea77f6b0dda82e2c"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1728 is approved for Q0.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ba05b9c06dbc"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.060566+00:00"
+ingested_at: "2026-05-14T20:26:17.060566+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.060566+00:00"
+content_hash: "sha256:bcfdf3b3526a4074d36b1ad7678f68a046cb3a21c780c082817103d56520a828"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1979 is approved for Q3.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_9c8c7a36edd5"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.062984+00:00"
+ingested_at: "2026-05-14T20:24:26.062984+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.062984+00:00"
+content_hash: "sha256:17f5b80e2e1d3d05a8d5c762ac7680ee4a3bb6780f83f7ccc91e5cdea3ce4313"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 263 content

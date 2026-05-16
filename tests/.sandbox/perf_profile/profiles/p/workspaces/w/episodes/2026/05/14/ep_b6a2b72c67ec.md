@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b6a2b72c67ec"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.680604+00:00"
+ingested_at: "2026-05-14T20:26:27.680604+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.680604+00:00"
+content_hash: "sha256:0070305f6e4175f825ba3b2d8bde72e936e7acfd93f859f4cff2027141583593"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2682 is approved for Q2.

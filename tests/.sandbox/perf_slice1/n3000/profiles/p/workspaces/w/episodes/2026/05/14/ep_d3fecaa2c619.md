@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d3fecaa2c619"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.844930+00:00"
+ingested_at: "2026-05-14T20:26:16.844930+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.844930+00:00"
+content_hash: "sha256:543f7b739f40dee5aae79786f1aef8b0506f14827d33fe2b0b012c6409fcc12b"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 823 is approved for Q3.

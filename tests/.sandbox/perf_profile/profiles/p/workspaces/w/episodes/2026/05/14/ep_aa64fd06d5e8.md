@@ -1,0 +1,18 @@
+---
+episode_id: "ep_aa64fd06d5e8"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.626263+00:00"
+ingested_at: "2026-05-14T20:26:27.626263+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.626263+00:00"
+content_hash: "sha256:dc0d9b50ff08c4cac8263af8b45dcddb84d0aba92310baf3fc86d706faa9e9ab"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2455 is approved for Q3.

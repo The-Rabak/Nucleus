@@ -1,0 +1,18 @@
+---
+episode_id: "ep_6eeddacb1581"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.414363+00:00"
+ingested_at: "2026-05-14T20:26:16.414363+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.414363+00:00"
+content_hash: "sha256:2b58ad12c016fada5ffda0d2288307a03263754111d348f8b515c199daf60dec"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 795 is approved for Q3.

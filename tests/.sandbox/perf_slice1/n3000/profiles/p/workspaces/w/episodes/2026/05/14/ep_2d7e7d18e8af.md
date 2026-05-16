@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2d7e7d18e8af"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.182104+00:00"
+ingested_at: "2026-05-14T20:26:17.182104+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.182104+00:00"
+content_hash: "sha256:0be36206ecd966ca45745f44cd8b32cbe52a22b367bbe648be815691e65ea5ee"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2514 is approved for Q2.

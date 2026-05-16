@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f0fc0f33fda7"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.676626+00:00"
+ingested_at: "2026-05-14T20:26:16.676626+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.676626+00:00"
+content_hash: "sha256:390a44dae35f36d12b93113bf7ae0450c10693b78817fcdf8d9c00e07e192a13"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 119 is approved for Q3.

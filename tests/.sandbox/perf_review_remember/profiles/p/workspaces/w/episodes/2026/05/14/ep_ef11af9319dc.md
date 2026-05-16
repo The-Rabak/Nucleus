@@ -1,0 +1,18 @@
+---
+episode_id: "ep_ef11af9319dc"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.872696+00:00"
+ingested_at: "2026-05-14T20:24:25.872696+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.872696+00:00"
+content_hash: "sha256:667256e937f85dbdb5793466811fb4ae8550fec665c25d9e9667795f42c667ca"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 358 content

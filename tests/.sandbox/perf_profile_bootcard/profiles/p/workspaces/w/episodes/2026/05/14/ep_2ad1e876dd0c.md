@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2ad1e876dd0c"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.247706+00:00"
+ingested_at: "2026-05-14T20:26:35.247706+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.247706+00:00"
+content_hash: "sha256:91456cf2633a68e44fe64d34ddc6bba848f5a45b3cef1d159ab21b8d6bc3bcb0"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2318 is approved for Q2.

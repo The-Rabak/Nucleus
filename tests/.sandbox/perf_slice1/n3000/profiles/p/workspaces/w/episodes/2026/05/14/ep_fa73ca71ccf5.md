@@ -1,0 +1,18 @@
+---
+episode_id: "ep_fa73ca71ccf5"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.937295+00:00"
+ingested_at: "2026-05-14T20:26:16.937295+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.937295+00:00"
+content_hash: "sha256:87b43dcc822b1e2e2557597e4833974edf29cdb3ad6b9b6182d02c76804e846a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1345 is approved for Q1.

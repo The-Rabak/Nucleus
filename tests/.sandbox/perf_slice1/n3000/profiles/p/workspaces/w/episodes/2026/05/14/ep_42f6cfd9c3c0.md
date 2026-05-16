@@ -1,0 +1,18 @@
+---
+episode_id: "ep_42f6cfd9c3c0"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:17.027649+00:00"
+ingested_at: "2026-05-14T20:26:17.027649+00:00"
+ttl_expires_at: "2026-08-12T20:26:17.027649+00:00"
+content_hash: "sha256:026416031bec16be89aef409a2115a9544743955f4bfe5dea89dfa9442bd0f18"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1807 is approved for Q3.

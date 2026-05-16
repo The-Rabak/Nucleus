@@ -1,0 +1,18 @@
+---
+episode_id: "ep_3ab5d184a5fc"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.515460+00:00"
+ingested_at: "2026-05-14T20:26:27.515460+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.515460+00:00"
+content_hash: "sha256:54af9a53729757485ea507ed66f16f4f2859c7a9aeaa57ea871dc3ccf9808723"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1989 is approved for Q1.

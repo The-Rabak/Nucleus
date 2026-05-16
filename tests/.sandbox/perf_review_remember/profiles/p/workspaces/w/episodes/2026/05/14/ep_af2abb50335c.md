@@ -1,0 +1,18 @@
+---
+episode_id: "ep_af2abb50335c"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.142108+00:00"
+ingested_at: "2026-05-14T20:24:26.142108+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.142108+00:00"
+content_hash: "sha256:9d7e4c7d9594615bc083b0436031abddf6e395074c0ef720d080d1c22c92237f"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 581 content

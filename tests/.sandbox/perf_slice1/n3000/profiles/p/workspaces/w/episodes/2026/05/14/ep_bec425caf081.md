@@ -1,0 +1,18 @@
+---
+episode_id: "ep_bec425caf081"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.853548+00:00"
+ingested_at: "2026-05-14T20:26:16.853548+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.853548+00:00"
+content_hash: "sha256:bd755a93e8091e19ae1fbff7ee0d731c97e789352b7fd790f9f96b3b4d2ac56e"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 868 is approved for Q0.

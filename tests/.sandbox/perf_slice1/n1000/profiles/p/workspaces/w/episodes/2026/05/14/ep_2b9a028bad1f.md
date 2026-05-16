@@ -1,0 +1,18 @@
+---
+episode_id: "ep_2b9a028bad1f"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.366733+00:00"
+ingested_at: "2026-05-14T20:26:16.366733+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.366733+00:00"
+content_hash: "sha256:ba78eaca65588674768eb5013f50740bb3b1f2dd09002610a8d35822960adf94"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 592 is approved for Q0.

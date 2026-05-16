@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f4f67137dabd"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.996509+00:00"
+ingested_at: "2026-05-14T20:26:16.996509+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.996509+00:00"
+content_hash: "sha256:acf78d4c6eae90574993fb4027574372c4066226cadf0bf17ef6e0f389a6d1ce"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1638 is approved for Q2.

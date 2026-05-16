@@ -1,0 +1,18 @@
+---
+episode_id: "ep_de4ca8a91ded"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.086093+00:00"
+ingested_at: "2026-05-14T20:24:26.086093+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.086093+00:00"
+content_hash: "sha256:2bd89dba98c071760fc93e96c801a65afda5c7b77471a7824c38ca8273eac8e1"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 380 content

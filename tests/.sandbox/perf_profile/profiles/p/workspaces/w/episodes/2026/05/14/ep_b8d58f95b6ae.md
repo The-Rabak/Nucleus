@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b8d58f95b6ae"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.729826+00:00"
+ingested_at: "2026-05-14T20:26:27.729826+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.729826+00:00"
+content_hash: "sha256:f52c6eb32b9f1ff6be3deb9065ef96c746bbb310b2143b2c9aa018b9cd342ebc"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2915 is approved for Q3.

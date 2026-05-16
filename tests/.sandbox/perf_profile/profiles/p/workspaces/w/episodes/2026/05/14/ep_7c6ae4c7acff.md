@@ -1,0 +1,18 @@
+---
+episode_id: "ep_7c6ae4c7acff"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.480653+00:00"
+ingested_at: "2026-05-14T20:26:27.480653+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.480653+00:00"
+content_hash: "sha256:1f9c84656d06570fdbe3a85a4d3c61f9c1a907882a8e2bc7d6d58b9ad1892f20"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1835 is approved for Q3.

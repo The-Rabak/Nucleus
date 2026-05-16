@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f1a0e17b61bc"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.744465+00:00"
+ingested_at: "2026-05-14T20:26:27.744465+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.744465+00:00"
+content_hash: "sha256:d5309a715cafad183bc76dc589501558c6d72bf3155ea06fb4af40a49523a933"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2980 is approved for Q0.

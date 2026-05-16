@@ -1,0 +1,18 @@
+---
+episode_id: "ep_0c40d67cf6cb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.538808+00:00"
+ingested_at: "2026-05-14T20:26:27.538808+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.538808+00:00"
+content_hash: "sha256:8daf7e94c2ce20b23098db51082ecff42eef9331c8e4aa5c80dc8d68c4f1aa79"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2079 is approved for Q3.

@@ -1,0 +1,18 @@
+---
+episode_id: "ep_4dc88eed28d8"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:25.928480+00:00"
+ingested_at: "2026-05-14T20:24:25.928480+00:00"
+ttl_expires_at: "2026-08-12T20:24:25.928480+00:00"
+content_hash: "sha256:a2b2bd224970214467f3b29ec287f863accbd915ada298bf4336965aa6da0109"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 613 content

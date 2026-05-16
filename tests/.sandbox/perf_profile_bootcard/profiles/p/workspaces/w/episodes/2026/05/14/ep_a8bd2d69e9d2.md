@@ -1,0 +1,18 @@
+---
+episode_id: "ep_a8bd2d69e9d2"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.003411+00:00"
+ingested_at: "2026-05-14T20:26:35.003411+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.003411+00:00"
+content_hash: "sha256:490c7aa64c75f58eece344c22b90ace08d11693bf9348ae728f729c8c59a9743"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1387 is approved for Q3.

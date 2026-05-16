@@ -1,0 +1,18 @@
+---
+episode_id: "ep_6c5cb9bdeaf6"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.818702+00:00"
+ingested_at: "2026-05-14T20:26:16.818702+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.818702+00:00"
+content_hash: "sha256:64096d927fb639a38896097ac237b270c4064af1c603f1fc51610bd070535810"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 726 is approved for Q2.

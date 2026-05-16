@@ -1,0 +1,18 @@
+---
+episode_id: "ep_cfa77c7bd2c9"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.531769+00:00"
+ingested_at: "2026-05-14T20:26:27.531769+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.531769+00:00"
+content_hash: "sha256:52e8f91070ae93de0397fe4abc78d0b82d32adef38d3b3e1f427caf847aa9d79"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 2057 is approved for Q1.

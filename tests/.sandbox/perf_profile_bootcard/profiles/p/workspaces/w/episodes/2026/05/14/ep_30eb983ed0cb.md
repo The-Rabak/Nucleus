@@ -1,0 +1,18 @@
+---
+episode_id: "ep_30eb983ed0cb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:34.757283+00:00"
+ingested_at: "2026-05-14T20:26:34.757283+00:00"
+ttl_expires_at: "2026-08-12T20:26:34.757283+00:00"
+content_hash: "sha256:e42b89f1daac9ac2cf274b318da93c6741c70a67dee228e2098c7f4733fe0ea1"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 410 is approved for Q2.

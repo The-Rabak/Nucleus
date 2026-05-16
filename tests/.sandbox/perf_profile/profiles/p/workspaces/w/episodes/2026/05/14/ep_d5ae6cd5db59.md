@@ -1,0 +1,18 @@
+---
+episode_id: "ep_d5ae6cd5db59"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.430251+00:00"
+ingested_at: "2026-05-14T20:26:27.430251+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.430251+00:00"
+content_hash: "sha256:f317a1bf41463557f879f5d0a639c3d43615fd0558e9e1305057c61dc8ed2ea1"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1609 is approved for Q1.

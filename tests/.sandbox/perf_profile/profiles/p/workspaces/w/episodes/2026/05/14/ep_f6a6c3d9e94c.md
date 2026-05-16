@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f6a6c3d9e94c"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.115791+00:00"
+ingested_at: "2026-05-14T20:26:27.115791+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.115791+00:00"
+content_hash: "sha256:8c6e7d61c5ab5321468abc9d23a5259d494fcf4d494e21ad041f7130e254f483"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 150 is approved for Q2.

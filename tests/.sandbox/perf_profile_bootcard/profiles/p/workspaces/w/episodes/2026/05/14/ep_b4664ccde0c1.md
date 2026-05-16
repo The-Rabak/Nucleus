@@ -1,0 +1,18 @@
+---
+episode_id: "ep_b4664ccde0c1"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:35.063934+00:00"
+ingested_at: "2026-05-14T20:26:35.063934+00:00"
+ttl_expires_at: "2026-08-12T20:26:35.063934+00:00"
+content_hash: "sha256:7e1d48f789c43d7178c671cbb15ad8df9254bac40a47359bf317271e480d113a"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1632 is approved for Q0.

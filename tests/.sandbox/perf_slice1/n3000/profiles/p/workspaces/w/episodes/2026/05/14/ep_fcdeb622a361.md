@@ -1,0 +1,18 @@
+---
+episode_id: "ep_fcdeb622a361"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.828928+00:00"
+ingested_at: "2026-05-14T20:26:16.828928+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.828928+00:00"
+content_hash: "sha256:4cfda10f903ad4a8774b49416fa7e52a3edac5b04e3365a96e4b33588e03b750"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 762 is approved for Q2.

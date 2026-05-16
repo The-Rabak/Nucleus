@@ -1,0 +1,18 @@
+---
+episode_id: "ep_f3e1bd8a703a"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:27.483909+00:00"
+ingested_at: "2026-05-14T20:26:27.483909+00:00"
+ttl_expires_at: "2026-08-12T20:26:27.483909+00:00"
+content_hash: "sha256:aac1c5db0aebe93b3fb0e8101a92507f5e4dd6de71c7e77d4b1c6774a3ef39a3"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 1849 is approved for Q1.

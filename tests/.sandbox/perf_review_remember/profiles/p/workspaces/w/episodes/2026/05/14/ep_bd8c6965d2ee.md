@@ -1,0 +1,18 @@
+---
+episode_id: "ep_bd8c6965d2ee"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:24:26.111207+00:00"
+ingested_at: "2026-05-14T20:24:26.111207+00:00"
+ttl_expires_at: "2026-08-12T20:24:26.111207+00:00"
+content_hash: "sha256:8227677a3b30e2cc1fb7140b4799a78a93323681599bbf8a095410da3ab216d6"
+schema_version: "nucleus.episode.v1"
+---
+
+episode 479 content

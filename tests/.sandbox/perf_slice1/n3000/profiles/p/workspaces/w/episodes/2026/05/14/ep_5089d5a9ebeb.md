@@ -1,0 +1,18 @@
+---
+episode_id: "ep_5089d5a9ebeb"
+profile_id: "p"
+workspace_id: "w"
+source_type: "chat_turn"
+source_ref: null
+session_id: "s"
+turn_index: null
+speaker: "u"
+role: "user"
+observed_at: "2026-05-14T20:26:16.862393+00:00"
+ingested_at: "2026-05-14T20:26:16.862393+00:00"
+ttl_expires_at: "2026-08-12T20:26:16.862393+00:00"
+content_hash: "sha256:c14962a407a323dca8b93d8effcef297e0fa411615a16010973d8ec111970704"
+schema_version: "nucleus.episode.v1"
+---
+
+Project Apollo budget item 917 is approved for Q1.
