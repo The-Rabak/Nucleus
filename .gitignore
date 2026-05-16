@@ -32,5 +32,3 @@ venv/
 
 # Generated test sandbox runtime artifacts
 tests/.sandbox/
-.github/
-*.pyc
