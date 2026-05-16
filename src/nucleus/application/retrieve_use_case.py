@@ -11,10 +11,10 @@ from nucleus.application.context_packet import (
 from nucleus.application.ports import EpisodeRepository
 from nucleus.application.readiness_store import ReadinessStore
 from nucleus.domain.models import EpisodeRecord, RetrieveResult
+from nucleus.domain.scoping import resolve_scope_mode
 
 _MAX_TOP_K = 10
 _MAX_QUERY_LENGTH = 500
-_VALID_SCOPE_MODES = {"workspace_local", "profile_global"}
 
 
 class RetrieveUseCase:
@@ -29,14 +29,13 @@ class RetrieveUseCase:
         workspace_id: str,
         query: str,
         top_k: int = 5,
-        scope_mode: str = "workspace_local",
+        scope_mode: str | None = None,
     ) -> RetrieveResult:
         if top_k < 1 or top_k > _MAX_TOP_K:
             raise ValueError(f"top_k must be between 1 and {_MAX_TOP_K}.")
         if len(query) > _MAX_QUERY_LENGTH:
             raise ValueError(f"query must be <= {_MAX_QUERY_LENGTH} characters.")
-        if scope_mode not in _VALID_SCOPE_MODES:
-            raise ValueError("scope_mode must be one of: workspace_local, profile_global.")
+        scope = resolve_scope_mode(scope_mode=scope_mode)
 
         operation_started_at = time.perf_counter()
         episodes, scan_counters = self._episode_store.search(
@@ -44,7 +43,7 @@ class RetrieveUseCase:
             workspace_id=workspace_id,
             query=query,
             top_k=top_k,
-            scope_mode=scope_mode,
+            scope_mode=scope.effective_scope,
         )
         operation_duration_ms = round((time.perf_counter() - operation_started_at) * 1000, 3)
         results = [self._to_memory_result(item) for item in episodes]
@@ -58,15 +57,19 @@ class RetrieveUseCase:
         return RetrieveResult(
             retrieval_id=f"ret_{uuid.uuid4().hex[:12]}",
             evidence_status=evidence_status,
-            effective_scope=scope_mode,
-            scope_widened=(scope_mode == "profile_global"),
+            effective_scope=scope.effective_scope,
+            scope_widened=scope.scope_widened,
             results=results,
             context_packet=context_packet,
             readiness=readiness,
+            requested_scope_mode=scope.requested_scope_mode,
+            scope_policy=scope.scope_policy,
             observability={
                 "operation": "retrieve",
+                "visibility_policy": "active_only",
                 "duration_ms": operation_duration_ms,
                 "scan_counters": scan_counters,
+                "scope": scope.to_dict(),
             },
         )
 

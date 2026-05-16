@@ -1,0 +1,50 @@
+from __future__ import annotations
+
+from nucleus.application.readiness_store import ReadinessStore
+from nucleus.application.scope_validation import validate_scope_identifier
+from nucleus.application.session_checkpoint_service import SessionCheckpointService
+from nucleus.domain.models import InspectStatusResult
+from nucleus.domain.scoping import workspace_local_scope
+
+
+class InspectStatusUseCase:
+    def __init__(
+        self,
+        *,
+        readiness_store: ReadinessStore,
+        checkpoint_service: SessionCheckpointService,
+    ) -> None:
+        self._readiness_store = readiness_store
+        self._checkpoint_service = checkpoint_service
+
+    def execute(
+        self,
+        *,
+        profile_id: str,
+        workspace_id: str,
+        session_id: str,
+    ) -> InspectStatusResult:
+        scope = workspace_local_scope()
+        safe_profile_id = validate_scope_identifier(name="profile_id", value=profile_id)
+        safe_workspace_id = validate_scope_identifier(name="workspace_id", value=workspace_id)
+        safe_session_id = validate_scope_identifier(name="session_id", value=session_id)
+
+        readiness = self._readiness_store.snapshot(
+            profile_id=safe_profile_id,
+            workspace_id=safe_workspace_id,
+        ).to_dict()
+        latest_checkpoint = self._checkpoint_service.latest_checkpoint(
+            profile_id=safe_profile_id,
+            workspace_id=safe_workspace_id,
+            session_id=safe_session_id,
+        )
+
+        return InspectStatusResult(
+            effective_scope=scope.effective_scope,
+            scope_widened=scope.scope_widened,
+            requested_scope_mode=scope.requested_scope_mode,
+            scope_policy=scope.scope_policy,
+            readiness=readiness,
+            latest_checkpoint=latest_checkpoint,
+            warnings=[],
+        )
